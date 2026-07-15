@@ -1,31 +1,23 @@
 #include "rt.h"
 #include <stdio.h>
-#include <stdlib.h>
 
-static void	pixel_put(t_image *img, int x, int y, int color)
+static t_mlx	*fill_color(t_mlx *mlx)
 {
-	char	*dst;
+	int	x;
+	int	y;
 
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = (unsigned int)color;
-}
-
-static void fill_color(t_rt *rt)
-{
-	int x;
-	int y;
-
-	rt->img.ptr = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!rt->img.ptr)
+	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!mlx->img)
 	{
-		printf("failed to create a image");
-		exit(1);
+		printf("failed to create an image\n");
+		destroy_mlx(mlx);
+		return (NULL);
 	}
-	rt->img.addr = mlx_get_data_addr(
-		rt->img.ptr,
-        &rt->img.bpp,
-        &rt->img.line_length,
-        &rt->img.endian
+	mlx->addr = mlx_get_data_addr(
+		mlx->img,
+		&mlx->bpp,
+		&mlx->line_len,
+		&mlx->endian
 	);
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -33,17 +25,18 @@ static void fill_color(t_rt *rt)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			pixel_put(&rt->img, x, y, BLUE_COLOR);
+			put_pixel(mlx, x, y, BLUE_COLOR);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(rt->mlx, rt->win, rt->img.ptr, 0, 0); // adding img to window at location (0, 0)
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	return (mlx);
 }
 
 int	main(int argc, char **argv)
 {
-	t_rt	rt;
+	t_mlx	*mlx;
 
 	if (argc > 2)
 	{
@@ -51,19 +44,22 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	(void)argv;
-	rt.mlx = mlx_init();
-	if (rt.mlx == NULL)
+	mlx = init_mlx();
+	if (mlx == NULL)
 	{
-		printf("failed to initialize the connection with minilibx");
+		printf("failed to initialize the connection with minilibx\n");
 		return (1);
 	}
-	rt.win = mlx_new_window(rt.mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT"); /*rt.mlx is an instance or connection, title*/
-	if (rt.win == NULL)
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+	if (mlx->win == NULL)
 	{
-		printf("failed to create the window");
+		printf("failed to create the window\n");
+		destroy_mlx(mlx);
 		return (1);
 	}
-	fill_color(&rt);
-	mlx_loop(rt.mlx); //trigger events related ESC, Quit from keyboard.
+	if (fill_color(mlx) == NULL)
+		return (1);
+	mlx_loop(mlx->mlx);
+	destroy_mlx(mlx);
 	return (0);
 }
