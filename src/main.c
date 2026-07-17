@@ -1,69 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
+/*   Updated: 2026/07/16 14:18:11 by uvadakku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-static void	pixel_put(t_image *img, int x, int y, int color)
+int create_image(t_mlx *mlx)
 {
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = (unsigned int)color;
+    mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+    if (!mlx->img)
+    {
+        printf("failed to create an image\n");
+        destroy_mlx(mlx);
+        return (0);
+    }
+    mlx->addr = mlx_get_data_addr(
+        mlx->img,
+        &mlx->bpp,
+        &mlx->line_len,
+        &mlx->endian
+    );
+    return (1);
 }
 
-static void fill_color(t_rt *rt)
+void render_color(t_mlx *mlx, int color)
 {
-	int x;
-	int y;
+    int x;
+    int y;
 
-	rt->img.ptr = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!rt->img.ptr)
-	{
-		printf("failed to create a image");
-		exit(1);
-	}
-	rt->img.addr = mlx_get_data_addr(
-		rt->img.ptr,
-        &rt->img.bpp,
-        &rt->img.line_length,
-        &rt->img.endian
-	);
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			pixel_put(&rt->img, x, y, BLUE_COLOR);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(rt->mlx, rt->win, rt->img.ptr, 0, 0); // adding img to window at location (0, 0)
+    y = 0;
+    while (y < WIN_HEIGHT)
+    {
+        x = 0;
+        while (x < WIN_WIDTH)
+        {
+            put_pixel(mlx, x, y, color);
+            x++;
+        }
+        y++;
+    }
 }
 
-int	main(int argc, char **argv)
+t_mlx *fill_color(t_mlx *mlx)
 {
-	t_rt	rt;
+    if (!create_image(mlx))
+        return (NULL);
+    render_color(mlx, BLUE_COLOR);
+    mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+    return (mlx);
+}
 
-	if (argc > 2)
-	{
-		printf("usage: %s [scene.rt]\n", argv[0]);
-		return (1);
-	}
-	(void)argv;
-	rt.mlx = mlx_init();
-	if (rt.mlx == NULL)
-	{
-		printf("failed to initialize the connection with minilibx");
-		return (1);
-	}
-	rt.win = mlx_new_window(rt.mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT"); /*rt.mlx is an instance or connection, title*/
-	if (rt.win == NULL)
-	{
-		printf("failed to create the window");
-		return (1);
-	}
-	fill_color(&rt);
-	mlx_loop(rt.mlx); //trigger events related ESC, Quit from keyboard.
-	return (0);
+t_mlx  *start_mlx(void)
+{
+    t_mlx  *mlx;
+
+    mlx = init_mlx();
+    if (!mlx)
+    {
+        printf("failed to initialize the connection with minilibx\n");
+        return (NULL);
+    }
+    mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+    if (!mlx->win)
+    {
+        printf("failed to create the window\n");
+        destroy_mlx(mlx);
+        return (NULL);
+    }
+    if (fill_color(mlx) == NULL)
+        return (NULL);
+    return (mlx);
+}
+
+int main(int argc, char **argv)
+{
+    t_mlx *mlx;
+
+    if (argc > 2)
+    {
+        printf("usage: %s [scene.rt]\n", argv[0]);
+        return (1);
+    }
+    mlx = start_mlx();
+    if (!mlx)
+        return (1);
+    setup_hooks(mlx);
+    mlx_loop(mlx->mlx);
+    destroy_mlx(mlx);
+    return (0);
 }

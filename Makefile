@@ -9,16 +9,21 @@ INC_DIR := includes
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
-MLX_DIR := minilibx_macos_opengl/minilibx_opengl_20191021
+
+MLX_DIR := minilibx_opengl_20191021
 MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
+
 MLX_DIR := minilibx-linux
 MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
-endif
 
-SRC := $(SRC_DIR)/main.c
+endif 
+
+SRC := $(SRC_DIR)/main.c \
+	$(SRC_DIR)/hooking/hook.c \
+	$(SRC_DIR)/rendering/render.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
