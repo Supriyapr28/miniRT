@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   parse_line_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/20 13:05:18 by spaipur-         ###   ########.fr       */
+/*   Created: 2026/07/20 12:53:05 by spaipur-          #+#    #+#             */
+/*   Updated: 2026/07/20 13:07:09 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "parse.h"
 
-#include "objects.h"
+void  validate_vector(t_vec3 vector)
+{
+    (void)vector;
+    // Validate that the vector values are within the range of -1.0 to 1.0
+}
 
-//parsing
-void parse_scene(char *scene_path);
-char *trim_line(char *line);
-int is_skippable_line(char *line);
-char **create_tokens(char *line);
-void validate_token(char **tokens);
-void validate_color(t_color color);
-void validate_vector(t_vec3 vector);
+void validate_color(t_color color)
+{
+    (void)color;
+    // Validate that the color values are within the range of 0 to 255
+}
 
-void free_tokens(char **tokens);
-
-// parsing errors
-void parse_error(char *msg);
-
-#endif

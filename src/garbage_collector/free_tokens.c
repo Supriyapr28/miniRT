@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/20 13:05:18 by spaipur-         ###   ########.fr       */
+/*   Created: 2026/07/20 12:41:32 by spaipur-          #+#    #+#             */
+/*   Updated: 2026/07/20 13:21:22 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "rt.h"
 
-#include "objects.h"
+void free_tokens(char **tokens)
+{
+    int i;
 
-//parsing
-void parse_scene(char *scene_path);
-char *trim_line(char *line);
-int is_skippable_line(char *line);
-char **create_tokens(char *line);
-void validate_token(char **tokens);
-void validate_color(t_color color);
-void validate_vector(t_vec3 vector);
-
-void free_tokens(char **tokens);
-
-// parsing errors
-void parse_error(char *msg);
-
-#endif
+    if (!tokens)
+        return ;
+    i = 0;
+    while (tokens[i])
+    {
+        free(tokens[i]);
+        i++;
+    }
+    free(tokens);
+}

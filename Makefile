@@ -29,7 +29,9 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/rendering/render.c \
 	$(SRC_DIR)/parsing/parse_scene.c \
 	$(SRC_DIR)/parsing/parse_lines.c \
-	$(SRC_DIR)/error_handler/parse_error.c 
+	$(SRC_DIR)/parsing/parse_line_utils.c \
+	$(SRC_DIR)/error_handler/parse_error.c \
+	$(SRC_DIR)/garbage_collector/free_tokens.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
@@ -41,7 +43,7 @@ $(NAME): $(OBJ) $(LIBFT_A)
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+%.o: %.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(MLX_INC) -c $< -o $@
 
 clean:

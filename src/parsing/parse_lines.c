@@ -1,17 +1,55 @@
-#include"libft.h"
+#include "../libft/libft.h"
 #include"parse.h"
 
-char *trim_line(char *line)
+static int get_expected_token_count(char *type)
 {
-    char *trimmed;
-    trimmed = ft_strtrim(line , "\t\r\n");
-    free(line);
-    if (!trimmed)
-        parse_error("Memory allocation failed during trimming a line");
-    return (trimmed);
+    if (ft_strncmp(type, "A", 2) == 0)
+        return (3);
+    if (ft_strncmp(type, "C", 2) == 0)
+        return (4);
+    if (ft_strncmp(type, "L", 2) == 0)
+        return (4);
+    if (ft_strncmp(type, "sp", 3) == 0)
+        return (4);
+    if (ft_strncmp(type, "pl", 3) == 0)
+        return (4);
+    if (ft_strncmp(type, "cy", 3) == 0)
+        return (6);
+    return (0);
 }
 
-int is_skippable_line(char *line)
+static int count_tokens(char **tokens)
 {
-    return (line[0] == '\0' || line[0] == '#');
+    int count;
+
+    count = 0;
+    while (tokens[count])
+        count++;
+    return (count);
 }
+
+char **create_tokens(char *line)
+{
+    char **tokens;
+    tokens = ft_split(line, ' ');
+    free(line);
+    if (!tokens)
+        parse_error("Memory allocation failed during tokenization");
+    return (tokens);
+}
+
+void validate_token(char **tokens)
+{
+    int expected_count;
+    int actual_count;
+
+    if (!tokens || !tokens[0])
+        parse_error("Invalid tokenized line");
+    expected_count = get_expected_token_count(tokens[0]);
+    if (expected_count == 0)
+        parse_error("Unknown object type");
+    actual_count = count_tokens(tokens);
+    if (actual_count != expected_count)
+        parse_error("Invalid token count for object");
+}
+
