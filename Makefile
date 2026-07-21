@@ -29,6 +29,7 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/rendering/render.c \
 	$(SRC_DIR)/parsing/parse_scene.c \
 	$(SRC_DIR)/parsing/parse_elements.c \
+	$(SRC_DIR)/parsing_utils/ambient_utils.c \
 	$(SRC_DIR)/parsing/parse_types.c \
 	$(SRC_DIR)/parsing/parse_lines.c \
 	$(SRC_DIR)/parsing/parse_line_utils.c \

@@ -15,4 +15,8 @@ typedef struct s_color
     int b;
 } t_color;
 
+
+
+
+
 #endif 

@@ -31,7 +31,7 @@ static int count_tokens(char **tokens)
 char **create_tokens(char *line)
 {
     char **tokens;
-    tokens = ft_split(line, ' ');
+    tokens = ft_split(line, ' '); 
     free(line);
     if (!tokens)
         parse_error("Memory allocation failed during tokenization");

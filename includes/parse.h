@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/20 17:54:27 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/21 16:09:50 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 # define PARSE_H
 
 # include "../includes/objects.h"
+# include "../includes/error.h"
 
 typedef struct s_ambient
 {
-    double ratio;
-    int color;
+    int id;
+    int is_set; //flag to check for duplicate A declarations
+    double ratio; //light ratio
+    t_color color;
+    
 } t_ambient;
 
 typedef struct s_camera
@@ -37,6 +41,7 @@ typedef struct s_light
 
 typedef enum e_obj_type
 {
+    OBJ_AMBIENT,
     OBJ_SPHERE,
     OBJ_PLANE,
     OBJ_CYLINDER,

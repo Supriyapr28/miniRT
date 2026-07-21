@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:37:29 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/20 17:57:40 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/21 16:23:43 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@
 
 static void init_scene_defaults(t_scene *scene)
 {
+      // Ambient
+    scene->ambient.id = 0;
+    scene->ambient.is_set = 0;
     scene->ambient.ratio = 0.0;
-    scene->ambient.color = 0;
+    scene->ambient.color.r = 0;
+    scene->ambient.color.g = 0;
+    scene->ambient.color.b = 0;
+    
     scene->camera.origin.x = 0.0;
     scene->camera.origin.y = 0.0;
     scene->camera.origin.z = 0.0;
@@ -80,7 +86,6 @@ static int read_scene_file(int fd, t_scene *scene)
     while (line)
     {
         trimmed = trim_line(line);
-        free(line); // Free the raw line immediately after trimming it
         if (!is_skippable_line(trimmed))
         {
             if (!process_line(scene, trimmed))
