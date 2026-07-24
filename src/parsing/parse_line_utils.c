@@ -14,13 +14,15 @@
 
 void  validate_vector(t_vec3 vector)
 {
-    (void)vector;
-    // Validate that the vector values are within the range of -1.0 to 1.0
+    if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
+        || vector.z < -1.0 || vector.z > 1.0)
+        parse_error("Vector values must be in range -1.0 to 1.0");
 }
 
 void validate_color(t_color color)
 {
-    (void)color;
-    // Validate that the color values are within the range of 0 to 255
+    if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
+        || color.b < 0 || color.b > 255)
+        parse_error("Color values must be in range 0 to 255");
 }
 

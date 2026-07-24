@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:37:29 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/21 16:23:43 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:21:46 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char *trim_line(char *line)
 {
     char *trimmed;
     trimmed = ft_strtrim(line , "\t\r\n");
-    free(line);
     if (!trimmed)
         parse_error("Memory allocation failed during trimming a line");
     return (trimmed);
@@ -90,11 +89,11 @@ static int read_scene_file(int fd, t_scene *scene)
         {
             if (!process_line(scene, trimmed))
             {
-                free(trimmed);
+               // free(trimmed);
                 return (0); // Return failure
             }
         }
-        free(trimmed);
+       // free(trimmed);
         line = get_next_line(fd);
     }
     return (1); // Return success

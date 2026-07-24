@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/23 17:36:12 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/24 15:15:18 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,15 @@ int  parse_light(t_scene *scene, char **tokens);
 int  parse_sphere(t_scene *scene, char **tokens);
 int  parse_plane(t_scene *scene, char **tokens);
 int  parse_cylinder(t_scene *scene, char **tokens);
+int  parse_float(const char *str, double *out);
+int  parse_vector(const char *str, t_vec3 *out);
+int  parse_color(const char *str, t_color *out);
 void validate_color(t_color color);
 void validate_vector(t_vec3 vector);
 
 void free_tokens(char **tokens);
 
 // parsing errors
-void parse_error(char *msg);
+void parse_error(const char *msg);
 
 #endif

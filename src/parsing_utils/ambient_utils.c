@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambient_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 15:03:07 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/23 17:38:32 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:47:54 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "error.h"
 #include "parse.h"
 #include "../libft/libft.h"
-
 int validate_ratio(float ratio)
 {
     if (ratio < 0.0f || ratio > 1.0f)
