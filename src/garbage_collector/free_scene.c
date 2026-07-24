@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   free_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 10:47:52 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/16 12:29:04 by spaipur-         ###   ########.fr       */
+/*   Created: 2026/07/20 18:00:00 by uvadakku          #+#    #+#             */
+/*   Updated: 2026/07/20 18:08:33 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "parse.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void free_scene(t_scene *scene)
 {
-	int	i;
+	t_object	*current;
+	t_object	*next;
 
-	if (!s)
+	if (!scene)
 		return ;
-	i = 0;
-	while (s[i])
+	current = scene->object;
+	while (current)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		next = current->next;
+		free(current->data);
+		free(current);
+		current = next;
 	}
+	free(scene);
 }
