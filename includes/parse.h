@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/27 12:04:33 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/27 19:23:10 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_atof
 
 typedef struct s_camera
 {
-    t_vec3 origin;
+    int id; // OBJ_camera
+    int is_set;
+    t_vec3 coordinates; //camera position
     t_vec3 direction;
     double fov;
 } t_camera;
@@ -46,12 +48,13 @@ typedef struct s_light
 {
     t_vec3 origin;
     double brightness;
-    int color;
+    t_color color;
 } t_light;
 
 typedef enum e_obj_type
 {
     OBJ_AMBIENT,
+    OBJ_CAMERA,
     OBJ_SPHERE,
     OBJ_PLANE,
     OBJ_CYLINDER,
@@ -70,16 +73,16 @@ typedef struct s_scene
     t_camera camera;
     t_light light;
     t_object *object;
-}t_scene;
+} t_scene;
 
 t_scene *parse_scene(const char *path);
 void     free_scene(t_scene *scene);
 
 //parsing
-char *trim_line(char *line);
+char *trim_line(t_scene *scene, char *line);
 int is_skippable_line(char *line);
-char **create_tokens(char *line);
-int  validate_token(char **tokens);
+char **create_tokens(t_scene *scene, char *line);
+int  get_expected_token_count(char *type);
 int  dispatch_scene_parsing(t_scene *scene, char **tokens);
 int  parse_ambient(t_scene *scene, char **tokens);
 int  parse_camera(t_scene *scene, char **tokens);
@@ -90,9 +93,11 @@ int  parse_cylinder(t_scene *scene, char **tokens);
 int  parse_float(const char *str, double *out);
 int  parse_vector(const char *str, t_vec3 *out);
 int  parse_color(const char *str, t_color *out);
+
 int validate_ratio(float ratio);
-void validate_color(t_color color);
-void validate_vector(t_vec3 vector);
+int validate_color(t_color color);
+int validate_normalized_vector(t_vec3 vector);
+int validate_fov(double fov);
 void free_tokens(char **tokens);
 size_t array_size(char **arr);
 // parsing errors

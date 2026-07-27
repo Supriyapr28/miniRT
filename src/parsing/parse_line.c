@@ -1,7 +1,7 @@
 #include "../libft/libft.h"
-#include"parse.h"
+#include "parse.h"
 
-static int get_expected_token_count(char *type)
+int get_expected_token_count(char *type)
 {
     if (ft_strncmp(type, "A", 2) == 0)
         return (3);
@@ -18,39 +18,13 @@ static int get_expected_token_count(char *type)
     return (0);
 }
 
-static int count_tokens(char **tokens)
-{
-    int count;
-
-    count = 0;
-    while (tokens[count])
-        count++;
-    return (count);
-}
-
-char **create_tokens(char *line)
+char **create_tokens(t_scene *scene, char *line)
 {
     char **tokens;
+
     tokens = ft_split(line, ' '); 
-    free(line);
     if (!tokens)
-        parse_error("Memory allocation failed during tokenization");
+        ft_err_handler(scene, ERR_MEM_TOKENIZATION);
     return (tokens);
-}
-
-int validate_token(char **tokens)
-{
-    int expected_count;
-    int actual_count;
-
-    if (!tokens || !tokens[0])
-       return (parse_error("Invalid tokenized line"), 0);
-    expected_count = get_expected_token_count(tokens[0]);
-    if (expected_count == 0)
-        return (parse_error("Unknown object type"), 0);
-    actual_count = count_tokens(tokens);
-    if (actual_count != expected_count)
-        return (parse_error("Invalid token count for object"), 0);
-    return (1);
 }
 

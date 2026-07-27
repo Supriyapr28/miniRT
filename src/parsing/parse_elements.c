@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 16:28:29 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/27 12:03:45 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/27 19:11:34 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,43 @@
 #include "error.h"
 #include "parse.h"
 #include "../libft/libft.h"
+
+int parse_light(t_scene *scene, char **tokens)
+{
+    if (parse_vector(tokens[1], &scene->light.origin))
+        return ft_err_handler(scene, ERR_INVALID_COORD);
+    if (parse_float(tokens[2], &scene->light.brightness))
+        return ft_err_handler(scene, ERR_FLOAT);
+    if (validate_ratio(scene->light.brightness))
+        return ft_err_handler(scene, ERR_LIGHT_BRIGHTNESS);
+    if (parse_color(tokens[3], &scene->light.color))
+        return ft_err_handler(scene, ERR_INVALID_COLOR);
+    return (1);
+}
+
+int parse_camera(t_scene *scene, char **tokens)
+{
+    if (scene->camera.is_set)
+        return ft_err_handler(scene, ERR_OVER_CAMERA);
+    if (parse_vector(tokens[1], &scene->camera.coordinates))
+        return ft_err_handler(scene, ERR_INVALID_COORD);
+    if (parse_vector(tokens[2], &scene->camera.direction))
+        return ft_err_handler(scene, ERR_INVALID_DIRECT);
+    // orientation must be normalized
+    if (validate_normalized_vector(scene->camera.direction))
+        return ft_err_handler(scene, ERR_VECTOR_RANGE);
+    // 5.parse the field of view
+    if (parse_float(tokens[3], &scene->camera.fov))
+        return ft_err_handler(scene, ERR_FLOAT);
+    //FOv must be within vallid range (0-180)
+    if (validate_fov(scene->camera.fov))
+        return ft_err_handler(scene, ERR_FOV_RANGE);
+    //Mark camera as set and store type
+    scene->camera.id = OBJ_CAMERA;
+    scene->camera.is_set = 1;
+
+    return (1);
+} 
 
 int parse_ambient(t_scene *scene, char **tokens)
 {
@@ -23,10 +60,6 @@ int parse_ambient(t_scene *scene, char **tokens)
     // 1. Check duplicate ambient
     if (scene->ambient.is_set)
         return ft_err_handler(scene, ERR_OVER_AMBIENTS);
-    // 2. Token count must be exactly 3: A ratio color
-    if (array_size(tokens) != 3) 
-        return ft_err_handler(scene, ERR_INVALID_PARAM);
-    // 3. Parse ratio
     if (parse_float(tokens[1], &ratio))
         return ft_err_handler(scene, ERR_AMBIENT_RATIO);
     if (validate_ratio(ratio))
