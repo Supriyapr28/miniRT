@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/24 15:15:16 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/07/27 11:22:17 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,44 +43,7 @@ static int parse_fractional_part(const char *str, int i, double *fraction,
     }
     return (i);
 }
- 
-int parse_camera(t_scene *scene, char **tokens) 
-{ 
-    (void)scene; 
-    (void)tokens; 
-    return (1); 
-} 
 
-int parse_light(t_scene *scene, char **tokens) 
-{ 
-    (void)scene; 
-    (void)tokens; 
-    return (1); 
-} 
-
-int parse_sphere(t_scene *scene, char **tokens) 
-
-{ 
-    (void)scene; 
-    (void)tokens; 
-    return (1); 
-} 
-
-int parse_plane(t_scene *scene, char **tostatic int parse_component(const char *str, int i, double *out)kens) 
-{ 
-
-    (void)scene; 
-    (void)tokens; 
-    return (1); 
-} 
-
-int parse_cylinder(t_scene *scene, char **tokens) 
-
-{ 
-    (void)scene; 
-    (void)tokens; 
-    return (1); 
-} 
 
 int parse_float(const char *str, double *out)
 {

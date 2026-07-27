@@ -3,73 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   ambient_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/21 15:03:07 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/24 14:47:54 by spaipur-         ###   ########.fr       */
+/*   Created: 2026/07/23 16:54:07 by uvadakku          #+#    #+#             */
+/*   Updated: 2026/07/27 11:56:24 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
-#include "error.h"
-#include "parse.h"
-#include "../libft/libft.h"
-int validate_ratio(float ratio)
-{
-    if (ratio < 0.0f || ratio > 1.0f)
-        return (1);
-    return (0);
-}
+// #include "error.h"
+// #include "parse.h"
+// #include "objects.h"
+// #include "rt.h"
 
-int float_parser(char *str, float *out)
-{
-    int i;
-    int dot_count;
 
-    if (!str || !str[0])
-        return (1);
-    i = 0;
-    dot_count = 0;
+// static const char	*handle_sign_and_space(const char *str, int *sign)
+// {
+// 	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+// 		str++;
+// 	if (*str == '-' || *str == '+')
+// 	{
+// 		if (*str == '-')
+// 			*sign = -1;
+// 		str++;
+// 	}
+// 	return (str);
+// }
 
-    if (str[i] == '+' || str[i] == '-')
-        i++;
-    while (str[i])
-    {
-        if (str[i] == '.')
-            dot_count++;
-        else if (str[i] < '0' || str[i] > '9')
-            return (1); //non digit character found
-        if (dot_count > 1)
-            return (1); // Multiple decimals like "0..5"
-        i++;
-    }
-    *out = ft_atof(str); //string to float
-    return (0);    
-}
+// float	ft_atof(const char *str)
+// {
+// 	t_atof	p;
 
-size_t array_size(char **arr)
-{
- size_t len;
- 
- len = 0;
- if (!arr)
-    return (0);
- while (arr[len])
-    len++;
- return (len);
-}
+// 	p.fraction = 0.0f;
+// 	p.divisor = 1.0f;
+// 	p.sign = 1;
 
-void free_array(char **arr)
-{
-    size_t i;
-    
-    if (!arr)
-        return ;
-    i = 0;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
-}
+//     str = handle_sign_and_space(str, &p.sign);
+// 	p.integer_part = (float)ft_atoi(str);
+// 	while (*str >= '0' && *str <= '9')
+// 		str++;
+// 	if (*str == '.')
+// 	{
+// 		str++;
+// 		while (*str >= '0' && *str <= '9')
+// 		{
+// 			p.fraction = p.fraction * 10.0f + (*str++ - '0');
+// 			p.divisor *= 10.0f;
+// 		}
+// 	}
+// 	return (p.sign * (p.integer_part + (p.fraction / p.divisor)));
+// }
+
+
+// int float_parser(char *str, float *out)
+// {
+//     int i;
+//     int dot_count;
+
+//     if (!str || !str[0])
+//         return (1);
+//     i = 0;
+//     dot_count = 0;
+
+//     if (str[i] == '+' || str[i] == '-')
+//         i++;
+//     while (str[i])
+//     {
+//         if (str[i] == '.')
+//             dot_count++;
+//         else if (str[i] < '0' || str[i] > '9')
+//             return (1); //non digit character found
+//         if (dot_count > 1)
+//             return (1); // Multiple decimals like "0..5"
+//         i++;
+//     }
+//     *out = ft_atof(str); //string to float
+//     return (0);    
+// }
+

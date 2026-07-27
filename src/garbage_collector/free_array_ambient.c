@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   free_array_ambient.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/21 15:42:48 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/27 12:01:36 by uvadakku         ###   ########.fr       */
+/*   Created: 2026/07/27 11:40:43 by uvadakku          #+#    #+#             */
+/*   Updated: 2026/07/27 11:41:21 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include <stdlib.h>
+#include "parse.h"
 
-# include "../includes/objects.h"
-# include "../includes/parse.h"
+size_t array_size(char **arr)
+{
+ size_t len;
+ 
+ len = 0;
+ if (!arr)
+    return (0);
+ while (arr[len])
+    len++;
+ return (len);
+}
 
-//elements
-#define ERR_OVER_AMBIENTS  "Ambient already defined"
-#define ERR_INVALID_PARAM       "Wrong number of tokens"
-#define ERR_FLOAT          "Invalid float"
-#define ERR_AMBIENT_RATIO         "Ambient ratio must be 0.0 - 1.0"
-#define ERR_INVALID_COLOR         "Invalid RGB color"
-
-
-
-#endif
+void free_array(char **arr)
+{
+    size_t i;
+    
+    if (!arr)
+        return ;
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}

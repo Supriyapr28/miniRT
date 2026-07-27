@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/24 15:15:18 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/07/27 12:04:33 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../includes/objects.h"
 # include "../includes/error.h"
+# include <stdlib.h>
 
 typedef struct s_ambient
 {
@@ -89,12 +90,12 @@ int  parse_cylinder(t_scene *scene, char **tokens);
 int  parse_float(const char *str, double *out);
 int  parse_vector(const char *str, t_vec3 *out);
 int  parse_color(const char *str, t_color *out);
+int validate_ratio(float ratio);
 void validate_color(t_color color);
 void validate_vector(t_vec3 vector);
-
 void free_tokens(char **tokens);
-
+size_t array_size(char **arr);
 // parsing errors
+int ft_err_handler(t_scene *scene, const char *msg);
 void parse_error(const char *msg);
-
 #endif

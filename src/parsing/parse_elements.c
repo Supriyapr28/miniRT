@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 16:28:29 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/24 14:47:56 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/07/27 12:03:45 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,9 @@
 #include "parse.h"
 #include "../libft/libft.h"
 
-int ft_err_handler(t_scene *scene, const char *msg)
-{
-    printf("Error\n%s\n", msg);
-    free_scene(scene);
-    return (0);
-}
-
 int parse_ambient(t_scene *scene, char **tokens)
 {
-    float   ratio;
+    double   ratio;
     t_color color;
 
     // 1. Check duplicate ambient
@@ -34,12 +27,12 @@ int parse_ambient(t_scene *scene, char **tokens)
     if (array_size(tokens) != 3) 
         return ft_err_handler(scene, ERR_INVALID_PARAM);
     // 3. Parse ratio
-    if (float_parser(tokens[1], &ratio))
+    if (parse_float(tokens[1], &ratio))
         return ft_err_handler(scene, ERR_AMBIENT_RATIO);
     if (validate_ratio(ratio))
         return ft_err_handler(scene, ERR_AMBIENT_RATIO);
     // 4. Parse color --> not done
-    if (color_parser(tokens[2], &color))
+    if (parse_color(tokens[2], &color))
         return ft_err_handler(scene, ERR_INVALID_COLOR);
     // 5. Store into scene
     scene->ambient.id = OBJ_AMBIENT;

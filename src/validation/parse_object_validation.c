@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:53:05 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/20 13:07:09 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/07/27 11:45:03 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int validate_ratio(float ratio)
+{
+    if (ratio < 0.0f || ratio > 1.0f)
+        return (1);
+    return (0);
+}
 
 void  validate_vector(t_vec3 vector)
 {

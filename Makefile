@@ -29,13 +29,15 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/rendering/render.c \
 	$(SRC_DIR)/parsing/parse_scene.c \
 	$(SRC_DIR)/parsing/parse_elements.c \
-	$(SRC_DIR)/parsing_utils/ambient_utils.c \
-	$(SRC_DIR)/parsing/parse_types.c \
-	$(SRC_DIR)/parsing/parse_lines.c \
-	$(SRC_DIR)/parsing/parse_line_utils.c \
+	$(SRC_DIR)/parsing/parse_line.c \
+	$(SRC_DIR)/parsing/parse_objects.c \
+	$(SRC_DIR)/parsing_utils/parse_types_utils.c \
 	$(SRC_DIR)/error_handler/parse_error.c \
+	$(SRC_DIR)/garbage_collector/free_array_ambient.c \
 	$(SRC_DIR)/garbage_collector/free_scene.c \
-	$(SRC_DIR)/garbage_collector/free_tokens.c
+	$(SRC_DIR)/garbage_collector/free_tokens.c \
+	$(SRC_DIR)/validation/parse_object_validation.c 
+
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
