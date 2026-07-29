@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 15:42:48 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/27 19:20:23 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/28 20:02:24 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@
 #define ERR_LIGHT_PARAM         "Wrong number of tokens"
 #define ERR_LIGHT_BRIGHTNESS    "Light brightness must be 0.0 - 1.0"
 
+#define ERR_INVALID_ORIENT      "invalid orientation"
 #endif

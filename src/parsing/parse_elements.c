@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 16:28:29 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/27 19:11:34 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/28 17:30:17 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int parse_ambient(t_scene *scene, char **tokens)
     scene->ambient.color = color;
     return (1);
 }
-
 
 int  dispatch_scene_parsing(t_scene *scene, char **tokens)
 {

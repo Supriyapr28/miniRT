@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/27 19:23:10 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/28 19:59:13 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct s_atof
 
 typedef struct s_camera
 {
-    int id; // OBJ_camera
-    int is_set;
-    t_vec3 coordinates; //camera position
-    t_vec3 direction;
-    double fov;
+	int id; // OBJ_camera
+	int is_set;
+	t_vec3 coordinates; //camera position
+	t_vec3 direction;
+	double fov;
 } t_camera;
 
 typedef struct s_light
@@ -53,19 +53,47 @@ typedef struct s_light
 
 typedef enum e_obj_type
 {
-    OBJ_AMBIENT,
-    OBJ_CAMERA,
-    OBJ_SPHERE,
-    OBJ_PLANE,
-    OBJ_CYLINDER,
+	OBJ_AMBIENT,
+	OBJ_CAMERA,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
 } t_obj_type;
+
+typedef struct s_sphere
+{
+	t_vec3  center;
+	double  diameter;
+	t_color color;
+} t_sphere;
+
+typedef struct s_plane
+{
+	t_vec3  origin;
+ t_vec3  normal;
+ t_color color;
+} t_plane;
+
+typedef struct s_cylinder
+{
+	t_vec3  origin;
+	t_vec3  orientation;
+	double  diameter;
+	double  height;
+	t_color color;
+} t_cylinder;
 
 typedef struct s_object
 {
-    t_obj_type type;
-    void *data; //point to sphere or plane or cylinder   
-    struct s_object *next;
-}t_object;
+	t_obj_type type;
+	
+	union {
+		t_sphere sphere;
+		t_plane plane;
+		t_cylinder cylinder;
+	} u;
+	struct s_object *next;
+} t_object;
 
 typedef struct s_scene
 {
