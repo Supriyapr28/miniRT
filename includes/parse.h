@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/28 19:59:13 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:44:29 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int  dispatch_scene_parsing(t_scene *scene, char **tokens);
 int  parse_ambient(t_scene *scene, char **tokens);
 int  parse_camera(t_scene *scene, char **tokens);
 int  parse_light(t_scene *scene, char **tokens);
+t_object	*add_object(t_scene *scene, t_obj_type type);
 int  parse_sphere(t_scene *scene, char **tokens);
 int  parse_plane(t_scene *scene, char **tokens);
 int  parse_cylinder(t_scene *scene, char **tokens);

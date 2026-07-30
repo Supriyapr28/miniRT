@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:37:29 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/27 19:34:08 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:58:22 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,47 @@ int is_skippable_line(char *line)
     return (line[0] == '\0' || line[0] == '#');
 }
 
+static int validate_tokens(t_scene *scene, char **tokens)
+{
+    int    expected_count;
+    size_t actual_count;
+
+    // 1. Skip empty lines cleanly
+    if (!tokens[0])
+        return (0);
+    // 2. Validate known element/object identifier
+    expected_count = get_expected_token_count(tokens[0]);
+    if (expected_count == 0)
+        return (ft_err_handler(scene, ERR_UNKNOWN_OBJECT));
+    // 3. Validate token count matches requirements
+    actual_count = array_size(tokens);
+    if (actual_count != (size_t)expected_count)
+        return (ft_err_handler(scene, ERR_INVALID_TOKEN_COUNT));
+    return (1);
+}
+
 int process_line(t_scene *scene, char *trimmed)
 {
-    char **tokens;
-    size_t actual_count;
-    int expected_count;
+    char    **tokens;
+    int     val_status;
+    int     parse_status;
 
     tokens = create_tokens(scene, trimmed);
     if (!tokens)
-        ft_err_handler(scene, ERR_MEM_TOKENIZATION);
-    if (!tokens[0])
-        ft_err_handler(scene, ERR_INVALID_ELEMENT);
-    expected_count = get_expected_token_count(tokens[0]);
-    if (expected_count == 0)
-        ft_err_handler(scene, ERR_UNKNOWN_OBJECT);
-    actual_count = array_size(tokens);
-    if (actual_count != (size_t)expected_count)
-        ft_err_handler(scene, ERR_INVALID_TOKEN_COUNT);
-    if (!dispatch_scene_parsing(scene, tokens))
-        ft_err_handler(scene, ERR_INVALID_ELEMENT);
+        return (ft_err_handler(scene, ERR_MEM_TOKENIZATION));
+
+    val_status = validate_tokens(scene, tokens);
+    if (val_status <= 0)
+    {
+        free_tokens(tokens);
+        if (val_status == 0)// 1 for empty line, error code otherwise
+            return (1);
+        return (val_status);
+    }
+    parse_status = dispatch_scene_parsing(scene, tokens);
     free_tokens(tokens);
+    if (!parse_status)
+        return (ft_err_handler(scene, ERR_INVALID_ELEMENT));
     return (1);
 }
 

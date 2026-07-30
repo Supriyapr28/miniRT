@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 16:28:29 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/28 17:30:17 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:25:46 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int parse_light(t_scene *scene, char **tokens)
 {
+ // or your project's memory error code
     if (parse_vector(tokens[1], &scene->light.origin))
         return ft_err_handler(scene, ERR_INVALID_COORD);
     if (parse_float(tokens[2], &scene->light.brightness))
@@ -92,7 +93,6 @@ int  dispatch_scene_parsing(t_scene *scene, char **tokens)
 		return (parse_plane(scene, tokens));
 	if(ft_strncmp(type, "cy", 3) == 0)
 		return (parse_cylinder(scene, tokens));
-	return (0);
+	return ft_err_handler(scene, ERR_UNKNOWN_IDENTIFIER);
 }
-
 

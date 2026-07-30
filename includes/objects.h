@@ -18,5 +18,4 @@ typedef struct s_color
 
 
 
-
 #endif 

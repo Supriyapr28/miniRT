@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 18:00:00 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/20 18:08:33 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:47:35 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void free_scene(t_scene *scene)
 	while (current)
 	{
 		next = current->next;
-		free(current->data);
 		free(current);
 		current = next;
 	}

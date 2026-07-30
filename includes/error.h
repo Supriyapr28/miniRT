@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 15:42:48 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/28 20:02:24 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:25:33 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define ERR_UNKNOWN_OBJECT      "Unknown object type"
 #define ERR_INVALID_TOKEN_COUNT "Invalid token count for object"
 #define ERR_INVALID_ELEMENT     "Invalid scene element"
+#define ERR_UNKNOWN_IDENTIFIER  "Unknown identifier"
 
 #define ERR_OVER_AMBIENTS       "Ambient already defined"
 #define ERR_INVALID_PARAM       "Wrong number of tokens"
@@ -38,6 +39,6 @@
 #define ERR_FOV_RANGE           "FOV must be within valid range (0-180)"
 #define ERR_LIGHT_PARAM         "Wrong number of tokens"
 #define ERR_LIGHT_BRIGHTNESS    "Light brightness must be 0.0 - 1.0"
-
 #define ERR_INVALID_ORIENT      "invalid orientation"
+#define ERR_MALLOC              "Malloc error"
 #endif
