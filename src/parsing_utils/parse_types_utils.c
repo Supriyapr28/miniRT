@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_types.c                                      :+:      :+:    :+:   */
+/*   parse_types_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/27 11:22:17 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/07/31 14:50:01 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,11 @@ static int parse_color_component(const char *str, int i, int *out)
 {
     int value;
     int sign;
+    int has_digit;
 
     value = 0;
     sign = 1;
+    has_digit = 0;
     i = skip_spaces(str, i);
     if (str[i] == '+' || str[i] == '-')
     {
@@ -144,11 +146,12 @@ static int parse_color_component(const char *str, int i, int *out)
     }
     while (str[i] >= '0' && str[i] <= '9')
     {
+        has_digit = 1;
         value = value * 10 + (str[i] - '0');
         i++;
     }
     i = skip_spaces(str, i);
-    if (str[i] != ',' && str[i] != '\0')
+    if (!has_digit || (str[i] != ',' && str[i] != '\0'))
         return (-1);
     *out = sign * value;
     return (i);
@@ -173,7 +176,7 @@ int parse_color(const char *str, t_color *out)
     if (i < 0)
         return (1);
     i = skip_spaces(str, i);
-    if (str[i] != '\0')
+    if (str[i] != '\0' || validate_color(*out) != 0)
         return (1);
     return (0);
 }
