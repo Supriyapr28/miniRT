@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 10:47:52 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/16 12:29:04 by spaipur-         ###   ########.fr       */
+/*   Created: 2026/07/20 12:41:32 by spaipur-          #+#    #+#             */
+/*   Updated: 2026/07/20 13:21:22 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rt.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void free_tokens(char **tokens)
 {
-	int	i;
+    int i;
 
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+    if (!tokens)
+        return ;
+    i = 0;
+    while (tokens[i])
+    {
+        free(tokens[i]);
+        i++;
+    }
+    free(tokens);
 }
