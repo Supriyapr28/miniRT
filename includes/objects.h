@@ -15,7 +15,19 @@ typedef struct s_color
     int b;
 } t_color;
 
+typdef struct s_ray 
+{
+    t_vec3 origin;
+    t_vec3 direction;
+} t_ray;
 
+typdef struct s_hit 
+{
+    float t;
+    t_vec3 point;
+    t_vec3 normal;
+    t_color color;
+} t_hit;
 
 
 #endif 
