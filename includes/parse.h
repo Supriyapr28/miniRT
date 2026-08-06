@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
 /*   Updated: 2026/08/03 13:59:30 by uvadakku         ###   ########.fr       */
+=======
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
+/*   Updated: 2026/07/31 14:43:00 by spaipur-         ###   ########.fr       */
+>>>>>>> sup/phase_3_MAth_and_geometry
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +76,15 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
- t_vec3  origin;
+	t_vec3  origin;
  t_vec3  normal;
  t_color color;
 } t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec3  base;
-	t_vec3  axis;
+	t_vec3  origin;
+	t_vec3  orientation;
 	double  diameter;
 	double  height;
 	t_color color;

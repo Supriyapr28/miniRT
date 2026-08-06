@@ -2,6 +2,7 @@
 # define RT_H
 
 # include "mlx.h"
+# include "objects.h"
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
@@ -33,6 +34,18 @@ int     create_image(t_mlx *mlx);
 void    render_color(t_mlx *mlx, int color);
 t_mlx   *fill_color(t_mlx *mlx);
 t_mlx  *start_mlx(void);
+
+//Math
+t_vec3 vec3_add(t_vec3 a, t_vec3 b);
+t_vec3 vec3_sub(t_vec3 a, t_vec3 b);
+double vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3 vec3_cross(t_vec3 a, t_vec3 b);
+t_vec3 vec3_scale(t_vec3 a, double scalar);
+double vec3_length(t_vec3 a);
+t_vec3 vec3_normalize(t_vec3 a);
+double vec3_abs(double value);
+t_vec3 ray_at(t_ray ray, double t);
+double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal);
 
 #endif
 
