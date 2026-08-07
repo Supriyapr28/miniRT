@@ -76,17 +76,17 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_vec3  origin;
+ t_vec3  origin;
  t_vec3  normal;
  t_color color;
 } t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec3  origin;
+	t_vec3  origin;  /*center (midpoint between caps)*/
 	t_vec3  orientation;
-	double  diameter;
-	double  height;
+	double	radius;
+	double  half_height;
 	t_color color;
 } t_cylinder;
 

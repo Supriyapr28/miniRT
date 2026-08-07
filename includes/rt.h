@@ -46,6 +46,6 @@ t_vec3 vec3_normalize(t_vec3 a);
 double vec3_abs(double value);
 t_vec3 ray_at(t_ray ray, double t);
 double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal);
-
+bool hit_sphere(t_sphere*s, t_ray *ray, float t_min, float t_max, t_hit *hit);
 #endif
 
