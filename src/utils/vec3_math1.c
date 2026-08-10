@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_math1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 12:25:18 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/04 11:29:17 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/08/07 17:51:43 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ t_vec3 vec3_normalize(t_vec3 a)
     result.z = a.z / length;
     return (result);
 }
+
 

@@ -22,6 +22,7 @@ t_object *add_object(t_scene *scene, t_obj_type type)
 	if(!new_obj)
 		return (NULL);
 	new_obj->type = type; //Initialize node properties
+	new_obj->material = (t_color){0, 0, 0};
 	new_obj->next = NULL; 
 	
 	if (!scene->object) //Attach to scene object linked list
@@ -41,14 +42,17 @@ t_object *add_object(t_scene *scene, t_obj_type type)
 int parse_sphere(t_scene *scene, char **tokens)
 {
 	t_object *obj = add_object(scene, OBJ_SPHERE); // however you allocate objects
+	double diameter;
 	if (!obj)
         return (ft_err_handler(scene, ERR_MALLOC));
 	if (parse_vector(tokens[1], &obj->u.sphere.center))
 		return ft_err_handler(scene, ERR_INVALID_COORD);
-	if (parse_float(tokens[2], &obj->u.sphere.diameter))
+	if (parse_float(tokens[2], &diameter))
 		return ft_err_handler(scene, ERR_FLOAT);
+	obj->u.sphere.radius = diameter / 2.0;
 	if (parse_color(tokens[3], &obj->u.sphere.color))
 		return ft_err_handler(scene, ERR_INVALID_COLOR);
+	obj->material = obj->u.sphere.color;
 
 	return (1);
 }
@@ -66,12 +70,15 @@ int parse_plane(t_scene *scene, char **tokens)
 		return ft_err_handler(scene, ERR_VECTOR_RANGE);
 	if (parse_color(tokens[3], &obj->u.plane.color))
 		return ft_err_handler(scene, ERR_INVALID_COLOR);
+	obj->material = obj->u.plane.color;
 	return (1);
 	}
 
 int parse_cylinder(t_scene *scene, char **tokens)
 {
 	t_object *obj = add_object(scene, OBJ_CYLINDER);
+	double diameter;
+	double height;
 	if (!obj)
         return (ft_err_handler(scene, ERR_MALLOC));
 	if (parse_vector(tokens[1], &obj->u.cylinder.origin))
@@ -83,14 +90,17 @@ int parse_cylinder(t_scene *scene, char **tokens)
 	if (validate_normalized_vector(obj->u.cylinder.orientation))
 		return ft_err_handler(scene, ERR_VECTOR_RANGE);
 
-	if (parse_float(tokens[3], &obj->u.cylinder.diameter))
+	if (parse_float(tokens[3], &diameter))
 		return ft_err_handler(scene, ERR_FLOAT);
+	obj->u.cylinder.radius = diameter / 2.0;
 
-	if (parse_float(tokens[4], &obj->u.cylinder.height))
+	if (parse_float(tokens[4], &height))
 		return ft_err_handler(scene, ERR_FLOAT);
+	obj->u.cylinder.half_height = height / 2.0;
 
 	if (parse_color(tokens[5], &obj->u.cylinder.color))
 		return ft_err_handler(scene, ERR_INVALID_COLOR);
+	obj->material = obj->u.cylinder.color;
 		
 	return (1);
 }

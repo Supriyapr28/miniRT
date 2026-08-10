@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/31 14:43:00 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/08/07 17:33:00 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,50 +50,6 @@ typedef struct s_light
     double brightness;
     t_color color;
 } t_light;
-
-typedef enum e_obj_type
-{
-	OBJ_AMBIENT,
-	OBJ_CAMERA,
-	OBJ_SPHERE,
-	OBJ_PLANE,
-	OBJ_CYLINDER
-} t_obj_type;
-
-typedef struct s_sphere
-{
-	t_vec3  center;
-	double  diameter;
-	t_color color;
-} t_sphere;
-
-typedef struct s_plane
-{
-	t_vec3  origin;
- t_vec3  normal;
- t_color color;
-} t_plane;
-
-typedef struct s_cylinder
-{
-	t_vec3  origin;
-	t_vec3  orientation;
-	double  diameter;
-	double  height;
-	t_color color;
-} t_cylinder;
-
-typedef struct s_object
-{
-	t_obj_type type;
-	
-	union {
-		t_sphere sphere;
-		t_plane plane;
-		t_cylinder cylinder;
-	} u;
-	struct s_object *next;
-} t_object;
 
 typedef struct s_scene
 {
