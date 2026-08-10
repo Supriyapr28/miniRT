@@ -2,9 +2,12 @@ NAME := miniRT
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
+CPPFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR)
 
 SRC_DIR := src
 INC_DIR := includes
+LIBFT_DIR := libft
+LIBFT_A := $(LIBFT_DIR)/libft.a
 
 UNAME_S := $(shell uname -s)
 
@@ -23,24 +26,45 @@ endif
 
 SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/hooking/hook.c \
-	$(SRC_DIR)/rendering/render.c
+	$(SRC_DIR)/rendering/render.c \
+	$(SRC_DIR)/parsing/parse_scene.c \
+	$(SRC_DIR)/parsing/parse_elements.c \
+	$(SRC_DIR)/parsing/parse_line.c \
+	$(SRC_DIR)/parsing/parse_objects.c \
+	$(SRC_DIR)/parsing_utils/parse_types_utils.c \
+	$(SRC_DIR)/error_handler/parse_error.c \
+	$(SRC_DIR)/garbage_collector/free_array_ambient.c \
+	$(SRC_DIR)/garbage_collector/free_scene.c \
+	$(SRC_DIR)/garbage_collector/free_tokens.c \
+	$(SRC_DIR)/validation/parse_object_validation.c \
+	$(SRC_DIR)/utils/vec3_math.c \
+	$(SRC_DIR)/utils/vec3_math1.c \
+	$(SRC_DIR)/rendering/ray_tracer.c \
+	$(SRC_DIR)/rendering/ray_cylinder.c \
+	$(SRC_DIR)/rendering/ray_cyl_helper.c 
+
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT_A)
 	$(MAKE) -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX_LIB) -o $@
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_A) $(MLX_LIB) -o $@
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+$(LIBFT_A):
+	$(MAKE) -C $(LIBFT_DIR)
+
+%.o: %.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(MLX_INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

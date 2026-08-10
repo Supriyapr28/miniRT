@@ -6,10 +6,12 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/16 14:18:11 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/10 12:38:57 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt.h"
+#include "parse.h"
 #include "rt.h"
 
 int create_image(t_mlx *mlx)
@@ -82,12 +84,25 @@ t_mlx  *start_mlx(void)
 int main(int argc, char **argv)
 {
     t_mlx *mlx;
+<<<<<<< HEAD
 
     if (argc > 2)
     {
         printf("usage: %s [scene.rt]\n", argv[0]);
         return (1);
     }
+=======
+    t_scene *scene;
+
+    if (argc != 2)
+    {
+        printf("usage: ./miniRT scenes/scene.rt\n");
+        return (1);
+    }
+    scene = parse_scene(argv[1]);
+    if (!scene)
+        return (1);
+>>>>>>> obj_rep_intersections
     mlx = start_mlx();
     if (!mlx)
         return (1);
