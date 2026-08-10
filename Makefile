@@ -36,7 +36,11 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/garbage_collector/free_array_ambient.c \
 	$(SRC_DIR)/garbage_collector/free_scene.c \
 	$(SRC_DIR)/garbage_collector/free_tokens.c \
-	$(SRC_DIR)/validation/parse_object_validation.c 
+	$(SRC_DIR)/validation/parse_object_validation.c \
+	$(SRC_DIR)/utils/vec3_math.c \
+	$(SRC_DIR)/utils/vec3_math1.c \
+	$(SRC_DIR)/rendering/ray_tracer.c
+
 
 OBJ := $(SRC:.c=.o)
 
