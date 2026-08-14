@@ -25,10 +25,10 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-    float t;
-    t_vec3 point;
-    t_vec3 normal;
-    t_color color;
+    double t;       //distance from ray origin to intersection
+    t_vec3 point;  //exact intersection point in world space
+    t_vec3 normal; //surface normal at the hit point
+    t_color color; //obj color at hit
 } t_hit;
 
 typedef enum e_obj_type
