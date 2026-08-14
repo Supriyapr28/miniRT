@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/21 12:26:06 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/10 15:04:42 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,36 @@ int create_image(t_mlx *mlx)
     return (1);
 }
 
-void render_color(t_mlx *mlx, int color)
+static int ray_to_color(const t_ray *ray)
+{
+    int r;
+    int g;
+    int b;
+
+    r = (int)((ray->direction.x * 0.5 + 0.5) * 255.0);
+    g = (int)((ray->direction.y * 0.5 + 0.5) * 255.0);
+    b = (int)((ray->direction.z * 0.5 + 0.5) * 255.0);
+    if (r < 0)
+        r = 0;
+    if (r > 255)
+        r = 255;
+    if (g < 0)
+        g = 0;
+    if (g > 255)
+        g = 255;
+    if (b < 0)
+        b = 0;
+    if (b > 255)
+        b = 255;
+    return ((r << 16) | (g << 8) | b);
+}
+
+void render_color(t_mlx *mlx, const t_scene *scene)
 {
     int x;
     int y;
+    t_ray ray;
+    int color;
 
     y = 0;
     while (y < WIN_HEIGHT)
@@ -43,6 +69,8 @@ void render_color(t_mlx *mlx, int color)
         x = 0;
         while (x < WIN_WIDTH)
         {
+            ray = make_camera_ray(scene, x, y);
+            color = ray_to_color(&ray);
             put_pixel(mlx, x, y, color);
             x++;
         }
@@ -50,16 +78,16 @@ void render_color(t_mlx *mlx, int color)
     }
 }
 
-t_mlx *fill_color(t_mlx *mlx)
+t_mlx *fill_color(t_mlx *mlx, const t_scene *scene)
 {
     if (!create_image(mlx))
         return (NULL);
-    render_color(mlx, BLUE_COLOR);
+    render_color(mlx, scene);
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
     return (mlx);
 }
 
-t_mlx  *start_mlx(void)
+t_mlx  *start_mlx(const t_scene *scene)
 {
     t_mlx  *mlx;
 
@@ -76,7 +104,7 @@ t_mlx  *start_mlx(void)
         destroy_mlx(mlx);
         return (NULL);
     }
-    if (fill_color(mlx) == NULL)
+    if (fill_color(mlx, scene) == NULL)
         return (NULL);
     return (mlx);
 }
@@ -94,7 +122,7 @@ int main(int argc, char **argv)
     scene = parse_scene(argv[1]);
     if (!scene)
         return (1);
-    mlx = start_mlx();
+    mlx = start_mlx(scene);
     if (!mlx)
         return (1);
     setup_hooks(mlx);
