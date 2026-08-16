@@ -56,4 +56,3 @@ void check_caps(const t_ray *ray, const t_cylinder * cyl, double t_min, double t
 bool try_cap_update(const t_ray *ray, const t_cap_params *cap, t_cap_hit *best);
 
 #endif
-
