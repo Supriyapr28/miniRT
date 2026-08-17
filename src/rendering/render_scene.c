@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 12:19:41 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/16 17:03:36 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/17 16:15:44 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ static int color_to_int(t_color color)
 
 static void set_pixel(t_image *img, int x, int y, t_color color)
 {
-	int	index;
-	char	*dst;
-
+	int index;
+	char *dst;
+	
 	if (img == NULL)
 		return ;
 	if (x < 0 || y < 0 || x >= img->width || y >= img->height)
 		return ;
 	if (img->addr != NULL && img->line_length > 0 && img->bpp > 0)
 	{
-		index = (y * img->line_length) + (x * (img->bpp / 8));
+		index =  (y * img->line_length) + (x * (img->bpp / 8));
 		dst = img->addr + index;
 		*(unsigned int *)dst = (unsigned int)color_to_int(color);
 	}
@@ -88,8 +88,8 @@ bool trace_ray(const t_scene *scene, const t_ray *ray, t_hit *closest_hit)
 	bool hit_anything = false;
 
 	hit_anything |= intersect_spheres(scene, ray, closest_hit);
-//hit_anything |= intersect_planes(scene, ray, closest_hit);
-	//hit_anything |= intersect_planes(scene, ray, closest_hit);
+	hit_anything |= intersect_planes(scene, ray, closest_hit);
+	hit_anything |= intersect_cylinder(scene, ray, closest_hit);
 
 	return (hit_anything);
 }

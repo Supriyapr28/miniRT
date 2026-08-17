@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/16 16:36:39 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/17 16:28:20 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ size_t array_size(char **arr);
 int ft_err_handler(t_scene *scene, const char *msg);
 void parse_error(const char *msg);
 
+bool intersect_planes(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
 bool intersect_spheres(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+bool intersect_cylinder(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
 void render_scene(const t_scene *scene, t_image *img);
 bool trace_ray(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
 

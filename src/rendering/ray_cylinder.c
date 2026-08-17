@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:47:25 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/07 17:48:27 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/17 16:28:48 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static bool intersect_lateral(const t_ray *ray, const t_cylinder *cyl,
     return (true);
 }
 
-bool hit_cylinder(const t_ray *ray, const t_cylinder *cyl, double t_min,
+bool hit_cylinder(const t_cylinder *cyl, const t_ray *ray, double t_min,
     double t_max, t_hit *hit)
 {
     t_cap_hit best = {

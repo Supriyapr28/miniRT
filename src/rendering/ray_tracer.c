@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:17:32 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/16 16:55:37 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/17 15:36:13 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,21 @@ double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal
     if (t < 0.0)
         return (DBL_MAX);
     return (t);
+}
+
+bool hit_plane(t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit)
+{
+    double t = ray_plane_intersection(*ray, pl->origin, pl->normal);
+
+    if (t < t_min || t > t_max)
+        return false;
+
+    hit->t = t;
+    hit->point = ray_at(*ray, t);
+    hit->normal = pl->normal;
+    hit->color = pl->color;
+
+    return true;
 }
 
 bool hit_sphere(const t_sphere *sphere, const t_ray *ray, float t_min, float t_max, t_hit *hit)
