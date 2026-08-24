@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:17:32 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/07 17:51:11 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/10 15:19:20 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,40 @@
 #include "parse.h"
 #include<float.h>
 #include<math.h>
+
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
+
+static t_vec3 camera_world_up(const t_vec3 forward)
+{
+    if (vec3_abs(vec3_dot(forward, (t_vec3){0.0, 1.0, 0.0})) > 0.999)
+        return ((t_vec3){0.0, 0.0, 1.0});
+    return ((t_vec3){0.0, 1.0, 0.0});
+}
+
+t_ray make_camera_ray(const t_scene *scene, int x, int y)
+{
+    t_vec3 forward;
+    t_vec3 right;
+    t_vec3 up;
+    t_ray ray;
+    double fov;
+    ray.origin = scene->camera.coordinates;
+    forward = vec3_normalize(scene->camera.direction);
+    right = vec3_normalize(vec3_cross(camera_world_up(forward), forward));
+    up = vec3_normalize(vec3_cross(forward, right));
+    fov = tan((scene->camera.fov * M_PI / 180.0) / 2.0);
+    ray.direction = vec3_add(forward,
+        vec3_scale(right,
+            ((((double)x + 0.5) / (double)WIN_WIDTH) * 2.0 - 1.0) * fov * ((double)WIN_WIDTH / (double)WIN_HEIGHT)));
+    ray.direction = vec3_add(ray.direction,
+        vec3_scale(up,
+            ((1.0 - (((double)y + 0.5) / (double)WIN_HEIGHT) * 2.0)) * fov));
+    ray.direction = vec3_add(ray.direction, forward);
+    ray.direction = vec3_normalize(ray.direction);
+    return (ray);
+}
 
 t_vec3 ray_at(t_ray ray, double t)
 {
