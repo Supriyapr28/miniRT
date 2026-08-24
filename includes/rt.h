@@ -51,9 +51,9 @@ t_vec3 ray_at(t_ray ray, double t);
 t_ray make_camera_ray(const t_scene *scene, int x, int y);
 double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal);
 bool hit_sphere(const t_sphere *sphere, const t_ray *ray, float t_min, float t_max, t_hit *hit);
-bool hit_cylinder(const t_ray *ray, const t_cylinder *cyl, double t_min, double t_max, t_hit *hit);
+bool hit_cylinder(const t_cylinder *cyl, const t_ray *ray, double t_min, double t_max, t_hit *hit);
+bool hit_plane(t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit);
 void check_caps(const t_ray *ray, const t_cylinder * cyl, double t_min, double t_max, t_cap_hit *best);
 bool try_cap_update(const t_ray *ray, const t_cap_params *cap, t_cap_hit *best);
 
 #endif
-

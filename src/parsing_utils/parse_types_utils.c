@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/31 14:50:01 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/08/14 15:20:37 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int parse_fractional_part(const char *str, int i, double *fraction,
     }
     return (i);
 }
-
 
 int parse_float(const char *str, double *out)
 {

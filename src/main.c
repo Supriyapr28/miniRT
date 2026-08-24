@@ -6,7 +6,7 @@
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/10 15:04:42 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/08/20 13:53:34 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,19 @@ void render_color(t_mlx *mlx, const t_scene *scene)
 
 t_mlx *fill_color(t_mlx *mlx, const t_scene *scene)
 {
+    t_image	image;
+
     if (!create_image(mlx))
         return (NULL);
-    render_color(mlx, scene);
+    image.width = WIN_WIDTH;
+    image.height = WIN_HEIGHT;
+    image.bpp = mlx->bpp;
+    image.line_length = mlx->line_len;
+    image.endian = mlx->endian;
+    image.mlx_img = mlx->img;
+    image.addr = mlx->addr;
+    image.pixels = NULL;
+    render_scene(scene, &image);
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
     return (mlx);
 }

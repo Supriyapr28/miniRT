@@ -6,15 +6,16 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/07 17:33:00 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/17 16:28:20 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "../includes/objects.h"
-# include "../includes/error.h"
+# include "objects.h"
+# include "error.h"
+# include <stdbool.h>
 # include <stdlib.h>
 
 typedef struct s_ambient
@@ -25,7 +26,6 @@ typedef struct s_ambient
     t_color color;
     
 } t_ambient;
-
 
 typedef struct s_atof
 {
@@ -59,6 +59,18 @@ typedef struct s_scene
     t_object *object;
 } t_scene;
 
+typedef struct s_image
+{
+	int	width;
+	int	height;
+	int	bpp;
+	int	line_length;
+	int	endian;
+	void *mlx_img;   // MLX image pointer
+	char *addr;      // MLX pixel buffer
+	t_color *pixels;    // optional: your own pixel buffer
+} t_image;
+
 t_scene *parse_scene(const char *path);
 void     free_scene(t_scene *scene);
 
@@ -88,4 +100,11 @@ size_t array_size(char **arr);
 // parsing errors
 int ft_err_handler(t_scene *scene, const char *msg);
 void parse_error(const char *msg);
+
+bool intersect_planes(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+bool intersect_spheres(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+bool intersect_cylinder(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+void render_scene(const t_scene *scene, t_image *img);
+bool trace_ray(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+
 #endif

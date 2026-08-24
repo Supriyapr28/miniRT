@@ -41,7 +41,9 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/utils/vec3_math1.c \
 	$(SRC_DIR)/rendering/ray_tracer.c \
 	$(SRC_DIR)/rendering/ray_cylinder.c \
-	$(SRC_DIR)/rendering/ray_cyl_helper.c 
+	$(SRC_DIR)/rendering/ray_cyl_helper.c \
+	$(SRC_DIR)/rendering/render_scene.c \
+	$(SRC_DIR)/rendering/render_pl_cyl.c 
 
 OBJ := $(SRC:.c=.o)
 
