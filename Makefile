@@ -43,7 +43,8 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/rendering/ray_cylinder.c \
 	$(SRC_DIR)/rendering/ray_cyl_helper.c \
 	$(SRC_DIR)/rendering/render_scene.c \
-	$(SRC_DIR)/rendering/render_pl_cyl.c 
+	$(SRC_DIR)/rendering/lighting.c \
+	$(SRC_DIR)/rendering/render_pl_cyl.c
 
 OBJ := $(SRC:.c=.o)
 

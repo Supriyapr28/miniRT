@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 12:19:41 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/17 16:15:44 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:35:49 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void render_scene(const t_scene *scene, t_image *img)
 			bool hit_anything = trace_ray(scene, &ray, &closest_hit);		
 			if (hit_anything)
 			{
-				pixel_color = closest_hit.color;
+				pixel_color = shade(scene, &closest_hit);
 			}
 			else
 			{
