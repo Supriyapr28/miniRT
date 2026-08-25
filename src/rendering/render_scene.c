@@ -108,7 +108,7 @@ void render_scene(const t_scene *scene, t_image *img)
 			bool hit_anything = trace_ray(scene, &ray, &closest_hit);		
 			if (hit_anything)
 			{
-				pixel_color = closest_hit.color;
+				pixel_color = shade(scene, &closest_hit);
 			}
 			else
 			{

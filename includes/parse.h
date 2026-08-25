@@ -106,5 +106,6 @@ bool intersect_spheres(const t_scene *scene, const t_ray *ray, t_hit *closest_hi
 bool intersect_cylinder(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
 void render_scene(const t_scene *scene, t_image *img);
 bool trace_ray(const t_scene *scene, const t_ray *ray, t_hit *closest_hit);
+t_color shade(const t_scene *scene, const t_hit *hit);
 
 #endif
