@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:17:32 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/17 15:36:13 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:31:48 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"rt.h"
 #include "objects.h"
 #include "parse.h"
-#include<float.h>
-#include<math.h>
+#include <float.h>
+#include <math.h>
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
@@ -71,7 +71,7 @@ double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal
     return (t);
 }
 
-bool hit_plane(t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit)
+bool hit_plane(const t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit)
 {
     double t = ray_plane_intersection(*ray, pl->origin, pl->normal);
 

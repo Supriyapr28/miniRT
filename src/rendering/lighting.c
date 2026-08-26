@@ -3,15 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 12:00:00 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/24 12:00:00 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:02:44 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "parse.h"
+
+static bool shadow_hit_object(const t_object *object, const t_ray *ray, double light_dist)
+{
+    t_hit	hit;
+
+    if (object->type == OBJ_SPHERE)
+        return (hit_sphere(&object->u.sphere, ray, 0.001, light_dist, &hit));
+    if (object->type == OBJ_PLANE)
+        return (hit_plane(&object->u.plane, ray, 0.001, light_dist, &hit));
+    if (object->type == OBJ_CYLINDER)
+        return (hit_cylinder(&object->u.cylinder, ray, 0.001, light_dist, &hit));
+    return (false);
+}
+
+static t_ray make_shadow_ray(const t_hit *hit, const t_scene *scene)
+{
+	t_ray shadow;
+	
+    shadow.origin = vec3_add(hit->point, vec3_scale(hit->normal, 0.001));
+	shadow.direction = vec3_normalize(vec3_sub(scene->light.origin, hit->point));
+	return shadow;
+}
+
+static bool is_occluded(const t_scene *scene, const t_ray *shadow_ray, const t_hit *hit)
+{
+    double light_dist;
+    t_object *current;
+
+    light_dist = vec3_length(vec3_sub(scene->light.origin, hit->point));
+    current = scene->object;
+    while (current != NULL)
+    {
+        if (shadow_hit_object(current, shadow_ray, light_dist))
+            return (true);
+        current = current->next;
+    }
+    return (false);
+}
+
 
 static t_color compute_ambient(const t_scene *scene)
 {
@@ -29,7 +68,10 @@ static t_color compute_diffuse(const t_scene *scene, const t_hit *hit)
     double  diff;
     t_color diffuse;
 
-    light_dir = vec3_normalize(vec3_sub(scene->light.origin, hit->point));
+    t_ray shadow_ray = make_shadow_ray(hit, scene);
+    if (is_occluded(scene, &shadow_ray, hit))
+        return (t_color){0, 0, 0};
+    light_dir = shadow_ray.direction;
     diff = vec3_dot(hit->normal, light_dir);
     if (diff < 0.0)
         diff = 0.0;
