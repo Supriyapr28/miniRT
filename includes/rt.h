@@ -3,6 +3,7 @@
 
 # include "mlx.h"
 # include "objects.h"
+# include "camera.h"
 # include "parse.h"
 
 # include <stdbool.h>
@@ -25,9 +26,15 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
-int	    handle_key(int keycode, t_mlx *mlx);
-int	    handle_close(t_mlx *mlx);
-void	setup_hooks(t_mlx *mlx);
+typedef struct s_app
+{
+	t_mlx	*mlx;
+	t_scene	*scene;
+}	t_app;
+
+int	    handle_key(int keycode, void *param);
+int	    handle_close(void *param);
+void	setup_hooks(t_app *app);
 
 t_mlx	*init_mlx(void);
 void	destroy_mlx(t_mlx *mlx);
@@ -35,8 +42,9 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color);
 
 int     create_image(t_mlx *mlx);
 void    render_color(t_mlx *mlx, const t_scene *scene);
-t_mlx   *fill_color(t_mlx *mlx, const t_scene *scene);
-t_mlx  *start_mlx(const t_scene *scene);
+t_mlx  *start_mlx(t_app *app);
+void    render_frame(t_app *app);
+void    destroy_app(t_app *app);
 
 //Math
 t_vec3 vec3_add(t_vec3 a, t_vec3 b);

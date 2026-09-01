@@ -111,5 +111,14 @@ typedef struct s_cap_params
     double t_max;
 } t_cap_params;
 
+/* Vector math API used across camera and ray tracing modules */
+t_vec3 vec3_add(t_vec3 a, t_vec3 b);
+t_vec3 vec3_sub(t_vec3 a, t_vec3 b);
+double vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3 vec3_cross(t_vec3 a, t_vec3 b);
+t_vec3 vec3_scale(t_vec3 a, double scalar);
+double vec3_length(t_vec3 a);
+t_vec3 vec3_normalize(t_vec3 a);
+double vec3_abs(double value);
 
 #endif 

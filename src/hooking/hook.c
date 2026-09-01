@@ -3,34 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:10:59 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/16 12:55:46 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/01 18:11:40 by us               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int handle_key(int keycode, t_mlx *mlx)
+void setup_hooks(t_app *app)
 {
-    if (keycode == 53 || keycode == 65307)
-    {
-        destroy_mlx(mlx);
-        exit(0);
-    }
-    return (0);
+    mlx_hook(app->mlx->win, 2, 1L << 0, handle_key, app); //key press initiated
+    mlx_hook(app->mlx->win, 17, 0, handle_close, app); //window close button clicked
 }
 
-int handle_close(t_mlx *mlx)
+void destroy_app(t_app *app)
 {
-    destroy_mlx(mlx);
-    exit(0);
-    return (0);
-}
-
-void setup_hooks(t_mlx * mlx)
-{
-    mlx_hook(mlx->win, 2, 1L << 0, handle_key, mlx); //key press initiated
-    mlx_hook(mlx->win, 17, 0, handle_close, mlx);
+    if (app == NULL)
+        return ;
+    if (app->scene != NULL)
+        free_scene(app->scene);
+    destroy_mlx(app->mlx);
 }

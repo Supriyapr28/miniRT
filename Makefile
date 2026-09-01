@@ -26,7 +26,10 @@ endif
 
 SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/hooking/hook.c \
+	$(SRC_DIR)/hooking/key_handler.c \
 	$(SRC_DIR)/rendering/render.c \
+	$(SRC_DIR)/rendering/render_frame.c \
+	$(SRC_DIR)/camera/camera.c \
 	$(SRC_DIR)/parsing/parse_scene.c \
 	$(SRC_DIR)/parsing/parse_elements.c \
 	$(SRC_DIR)/parsing/parse_line.c \
