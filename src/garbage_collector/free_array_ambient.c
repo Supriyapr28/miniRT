@@ -13,29 +13,29 @@
 #include <stdlib.h>
 #include "parse.h"
 
-size_t array_size(char **arr)
+size_t	array_size(char **arr)
 {
- size_t len;
- 
- len = 0;
- if (!arr)
-    return (0);
- while (arr[len])
-    len++;
- return (len);
+	size_t	len;
+
+	if (!arr)
+		return (0);
+	len = 0;
+	while (arr[len])
+		len++;
+	return (len);
 }
 
-void free_array(char **arr)
+void	free_array(char **arr)
 {
-    size_t i;
-    
-    if (!arr)
-        return ;
-    i = 0;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
+	size_t	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

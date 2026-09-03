@@ -12,21 +12,21 @@
 
 #include "parse.h"
 
-int validate_fov(double fov)
+int	validate_fov(double fov)
 {
 	if (fov <= 0.0 || fov >= 180.0)
 		return (1);
 	return (0);
 }
 
-int validate_ratio(float ratio)
+int	validate_ratio(float ratio)
 {
 	if (ratio < 0.0f || ratio > 1.0f)
 		return (1);
 	return (0);
 }
 
-int validate_normalized_vector(t_vec3 vector)
+int	validate_normalized_vector(t_vec3 vector)
 {
 	if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
 		|| vector.z < -1.0 || vector.z > 1.0)
@@ -36,11 +36,10 @@ int validate_normalized_vector(t_vec3 vector)
 	return (0);
 }
 
-int validate_color(t_color color)
+int	validate_color(t_color color)
 {
 	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
 		|| color.b < 0 || color.b > 255)
 		return (1);
 	return (0);
 }
-

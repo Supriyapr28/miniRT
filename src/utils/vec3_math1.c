@@ -14,51 +14,49 @@
 #include <float.h>
 #include "rt.h"
 
-double vec3_abs(double value)
+double	vec3_abs(double value)
 {
-    if (value < 0.0)
-        return (-value);
-    return (value);
+	if (value < 0.0)
+		return (-value);
+	return (value);
 }
 
-static double vec3_sqrt(double value)
+static double	vec3_sqrt(double value)
 {
-    double guess;
-    double next;
-    int i;
+	double	guess;
+	double	next;
+	int		i;
 
-    if (value <= 0.0)
-        return (0.0);
-    guess = value;
-    i = 0;
-    while (i < 20)
-    {
-        next = 0.5 * (guess + value / guess);
-        if (vec3_abs(next - guess) < 1e-12)
-            return (next);
-        guess = next;
-        i++;
-    }
-    return (guess);
+	if (value <= 0.0)
+		return (0.0);
+	guess = value;
+	i = 0;
+	while (i < 20)
+	{
+		next = 0.5 * (guess + value / guess);
+		if (vec3_abs(next - guess) < 1e-12)
+			return (next);
+		guess = next;
+		i++;
+	}
+	return (guess);
 }
 
-double vec3_length(t_vec3 a)
+double	vec3_length(t_vec3 a)
 {
-    return (vec3_sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+	return (vec3_sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-t_vec3 vec3_normalize(t_vec3 a)
+t_vec3	vec3_normalize(t_vec3 a)
 {
-    double length;
-    t_vec3 result;
+	double	length;
+	t_vec3	result;
 
-    length = vec3_length(a);
-    if (vec3_abs(length) < 1e-12)
-        return ((t_vec3){0.0, 0.0, 0.0});
-    result.x = a.x / length;
-    result.y = a.y / length;
-    result.z = a.z / length;
-    return (result);
+	length = vec3_length(a);
+	if (vec3_abs(length) < 1e-12)
+		return ((t_vec3){0.0, 0.0, 0.0});
+	result.x = a.x / length;
+	result.y = a.y / length;
+	result.z = a.z / length;
+	return (result);
 }
-
-

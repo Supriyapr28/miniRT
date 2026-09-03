@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "parse.h"
 
-void free_scene(t_scene *scene)
+void	free_scene(t_scene *scene)
 {
 	t_object	*current;
 	t_object	*next;

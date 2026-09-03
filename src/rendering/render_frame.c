@@ -10,31 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "rt.h"
-# include "parse.h"
+#include "rt.h"
 
-static t_image image_from_mlx(t_mlx *mlx)
+static t_image	image_from_mlx(t_mlx *mlx)
 {
-    t_image image;
+	t_image	image;
 
-    image.width = WIN_WIDTH;
-    image.height = WIN_HEIGHT;
-    image.bpp = mlx->bpp;
-    image.line_length = mlx->line_len;
-    image.endian = mlx->endian;
-    image.mlx_img = mlx->img;
-    image.addr = mlx->addr;
-    image.pixels = NULL;
-    return (image);
+	image.width = WIN_WIDTH;
+	image.height = WIN_HEIGHT;
+	image.bpp = mlx->bpp;
+	image.line_length = mlx->line_len;
+	image.endian = mlx->endian;
+	image.mlx_img = mlx->img;
+	image.addr = mlx->addr;
+	image.pixels = NULL;
+	return (image);
 }
 
-void render_frame(t_app *app)
+void	render_frame(t_app *app)
 {
-    t_image image;
+	t_image	image;
 
-    if (app == NULL || app->mlx == NULL || app->scene == NULL)
-        return ;
-    image = image_from_mlx(app->mlx);
-    render_scene(app->scene, &image);
-    mlx_put_image_to_window(app->mlx->mlx, app->mlx->win, app->mlx->img, 0, 0);
+	if (app == NULL || app->mlx == NULL || app->scene == NULL)
+		return ;
+	image = image_from_mlx(app->mlx);
+	render_scene(app->scene, &image);
+	mlx_put_image_to_window(app->mlx->mlx, app->mlx->win,
+		app->mlx->img, 0, 0);
 }
