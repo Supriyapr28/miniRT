@@ -3,29 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:17:32 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/17 15:36:13 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/01 17:08:18 by us               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"rt.h"
 #include "objects.h"
 #include "parse.h"
-#include<float.h>
-#include<math.h>
+#include <float.h>
+#include <math.h>
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
-
-static t_vec3 camera_world_up(const t_vec3 forward)
-{
-    if (vec3_abs(vec3_dot(forward, (t_vec3){0.0, 1.0, 0.0})) > 0.999)
-        return ((t_vec3){0.0, 0.0, 1.0});
-    return ((t_vec3){0.0, 1.0, 0.0});
-}
 
 t_ray make_camera_ray(const t_scene *scene, int x, int y)
 {
@@ -34,10 +27,13 @@ t_ray make_camera_ray(const t_scene *scene, int x, int y)
     t_vec3 up;
     t_ray ray;
     double fov;
+    t_camera_basis basis;
+
     ray.origin = scene->camera.coordinates;
-    forward = vec3_normalize(scene->camera.direction);
-    right = vec3_normalize(vec3_cross(camera_world_up(forward), forward));
-    up = vec3_normalize(vec3_cross(forward, right));
+    basis = camera_get_basis(&scene->camera);
+    forward = basis.forward;
+    right = basis.right;
+    up = basis.up;
     fov = tan((scene->camera.fov * M_PI / 180.0) / 2.0);
     ray.direction = vec3_add(forward,
         vec3_scale(right,
@@ -71,7 +67,7 @@ double ray_plane_intersection(t_ray ray, t_vec3 plane_point, t_vec3 plane_normal
     return (t);
 }
 
-bool hit_plane(t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit)
+bool hit_plane(const t_plane *pl, const t_ray *ray, double t_min, double t_max, t_hit *hit)
 {
     double t = ray_plane_intersection(*ray, pl->origin, pl->normal);
 

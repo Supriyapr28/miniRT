@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/20 13:53:34 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/01 18:23:30 by us               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,7 @@ void render_color(t_mlx *mlx, const t_scene *scene)
     }
 }
 
-t_mlx *fill_color(t_mlx *mlx, const t_scene *scene)
-{
-    t_image	image;
-
-    if (!create_image(mlx))
-        return (NULL);
-    image.width = WIN_WIDTH;
-    image.height = WIN_HEIGHT;
-    image.bpp = mlx->bpp;
-    image.line_length = mlx->line_len;
-    image.endian = mlx->endian;
-    image.mlx_img = mlx->img;
-    image.addr = mlx->addr;
-    image.pixels = NULL;
-    render_scene(scene, &image);
-    mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
-    return (mlx);
-}
-
-t_mlx  *start_mlx(const t_scene *scene)
+t_mlx  *start_mlx(t_app *app)
 {
     t_mlx  *mlx;
 
@@ -114,29 +95,34 @@ t_mlx  *start_mlx(const t_scene *scene)
         destroy_mlx(mlx);
         return (NULL);
     }
-    if (fill_color(mlx, scene) == NULL)
+    if (!create_image(mlx))
         return (NULL);
+    app->mlx = mlx;
+    render_frame(app);
     return (mlx);
 }
 
 int main(int argc, char **argv)
 {
-    t_mlx *mlx;
-    t_scene *scene;
+    t_app app;
 
     if (argc != 2)
     {
         printf("usage: ./miniRT scenes/scene.rt\n");
         return (1);
     }
-    scene = parse_scene(argv[1]);
-    if (!scene)
+    app.mlx = NULL;
+    app.scene = parse_scene(argv[1]);
+    if (!app.scene)
         return (1);
-    mlx = start_mlx(scene);
-    if (!mlx)
+    if (!start_mlx(&app))
+    {
+        free_scene(app.scene);
         return (1);
-    setup_hooks(mlx);
-    mlx_loop(mlx->mlx);
-    destroy_mlx(mlx);
+    }
+    setup_hooks(&app);
+    mlx_loop(app.mlx->mlx);
+    destroy_app(&app);
     return (0);
 }
+

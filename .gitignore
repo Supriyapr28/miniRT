@@ -1,0 +1,12 @@
+*.png
+*.o
+*.a
+miniRT
+scenes/__pycache__
+scenes/*.png
+scenes/*.bmp
+scenes/*.jpg
+scenes/*.py
+
+minilibx-linux/
+minilibx_opengl_20191021/
