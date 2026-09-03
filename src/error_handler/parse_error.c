@@ -15,16 +15,8 @@
 
 int	ft_err_handler(t_scene *scene, const char *msg)
 {
-	free_scene(scene);
+	(void)scene;
 	ft_putstr_fd("Error: ", 2);
 	ft_putendl_fd((char *)msg, 2);
-	exit(1);
-	return (0);
-}
-
-void	parse_error(const char *msg)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd((char *)msg, 2);
-	exit(1);
+	return (-1);
 }

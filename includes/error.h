@@ -36,5 +36,9 @@
 # define ERR_LIGHT_BRIGHTNESS    "Light brightness must be 0.0 - 1.0"
 # define ERR_INVALID_ORIENT      "invalid orientation"
 # define ERR_MALLOC              "Malloc error"
+# define ERR_MISSING_AMBIENT     "Missing ambient lighting in scene"
+# define ERR_MISSING_CAMERA      "Missing camera in scene"
+# define ERR_DIAMETER            "Object diameter must be positive"
+# define ERR_HEIGHT              "Object height must be positive"
 
 #endif

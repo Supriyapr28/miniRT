@@ -34,6 +34,22 @@ t_mlx	*init_mlx(void)
 	return (mlx);
 }
 
+#ifdef __APPLE__
+
+static void	close_mlx_display(void *ptr)
+{
+	(void)ptr;
+}
+
+#else
+
+static void	close_mlx_display(void *ptr)
+{
+	mlx_destroy_display(ptr);
+}
+
+#endif
+
 void	destroy_mlx(t_mlx *mlx)
 {
 	if (mlx == NULL)
@@ -43,7 +59,10 @@ void	destroy_mlx(t_mlx *mlx)
 	if (mlx->win != NULL)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 	if (mlx->mlx != NULL)
+	{
+		close_mlx_display(mlx->mlx);
 		free(mlx->mlx);
+	}
 	free(mlx);
 }
 

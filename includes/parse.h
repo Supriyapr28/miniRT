@@ -91,10 +91,11 @@ int			validate_ratio(float ratio);
 int			validate_color(t_color color);
 int			validate_normalized_vector(t_vec3 vector);
 int			validate_fov(double fov);
+int			validate_scene(t_scene *scene);
+int			validate_tokens(t_scene *scene, char **tokens);
 void		free_tokens(char **tokens);
 size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
-void		parse_error(const char *msg);
 bool		intersect_planes(const t_scene *scene, const t_ray *ray,
 				t_hit *closest_hit);
 bool		intersect_spheres(const t_scene *scene, const t_ray *ray,

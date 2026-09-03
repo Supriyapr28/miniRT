@@ -36,6 +36,16 @@ t_object	*add_object(t_scene *scene, t_obj_type type)
 	return (new_obj);
 }
 
+static int	parse_size(t_scene *scene, char *token, double *value,
+		const char *msg)
+{
+	if (parse_float(token, value))
+		return (ft_err_handler(scene, ERR_FLOAT));
+	if (*value <= 0.0)
+		return (ft_err_handler(scene, msg));
+	return (1);
+}
+
 int	parse_sphere(t_scene *scene, char **tokens)
 {
 	t_object	*obj;
@@ -46,8 +56,8 @@ int	parse_sphere(t_scene *scene, char **tokens)
 		return (ft_err_handler(scene, ERR_MALLOC));
 	if (parse_vector(tokens[1], &obj->u_data.sphere.center))
 		return (ft_err_handler(scene, ERR_INVALID_COORD));
-	if (parse_float(tokens[2], &diameter))
-		return (ft_err_handler(scene, ERR_FLOAT));
+	if (parse_size(scene, tokens[2], &diameter, ERR_DIAMETER) < 0)
+		return (-1);
 	obj->u_data.sphere.radius = diameter / 2.0;
 	if (parse_color(tokens[3], &obj->u_data.sphere.color))
 		return (ft_err_handler(scene, ERR_INVALID_COLOR));
@@ -89,11 +99,11 @@ int	parse_cylinder(t_scene *scene, char **tokens)
 		return (ft_err_handler(scene, ERR_INVALID_ORIENT));
 	if (validate_normalized_vector(obj->u_data.cylinder.orientation))
 		return (ft_err_handler(scene, ERR_VECTOR_RANGE));
-	if (parse_float(tokens[3], &diameter))
-		return (ft_err_handler(scene, ERR_FLOAT));
+	if (parse_size(scene, tokens[3], &diameter, ERR_DIAMETER) < 0)
+		return (-1);
 	obj->u_data.cylinder.radius = diameter / 2.0;
-	if (parse_float(tokens[4], &height))
-		return (ft_err_handler(scene, ERR_FLOAT));
+	if (parse_size(scene, tokens[4], &height, ERR_HEIGHT) < 0)
+		return (-1);
 	obj->u_data.cylinder.half_height = height / 2.0;
 	if (parse_color(tokens[5], &obj->u_data.cylinder.color))
 		return (ft_err_handler(scene, ERR_INVALID_COLOR));
