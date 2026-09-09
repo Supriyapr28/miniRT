@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:55 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/07 15:26:29 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:52:42 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "camera.h"
 # include "parse.h"
 # include "mlx.h"
-
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
