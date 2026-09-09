@@ -88,6 +88,8 @@ typedef struct s_object
 		t_plane		plane;
 		t_cylinder	cylinder;
 	}				u_data;
+	t_vec3			initial_pos;
+	t_vec3			initial_axis;
 	t_color			material;
 	struct s_object	*next;
 }	t_object;
@@ -136,5 +138,8 @@ t_vec3	vec3_scale(t_vec3 a, double scalar);
 double	vec3_length(t_vec3 a);
 t_vec3	vec3_normalize(t_vec3 a);
 double	vec3_abs(double value);
+
+void	object_save_initial(t_object *object);
+void	object_restore_initial(t_object *object);
 
 #endif

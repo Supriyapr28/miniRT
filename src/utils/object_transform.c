@@ -54,3 +54,39 @@ void	object_rotate(t_object *object, t_vec3 axis, double angle)
 		object->u_data.cylinder.orientation = vec3_normalize
 			(rotate_vector(object->u_data.cylinder.orientation, axis, angle));
 }
+
+void	object_save_initial(t_object *object)
+{
+	if (object == NULL)
+		return ;
+	if (object->type == OBJ_SPHERE)
+		object->initial_pos = object->u_data.sphere.center;
+	else if (object->type == OBJ_PLANE)
+	{
+		object->initial_pos = object->u_data.plane.origin;
+		object->initial_axis = object->u_data.plane.normal;
+	}
+	else if (object->type == OBJ_CYLINDER)
+	{
+		object->initial_pos = object->u_data.cylinder.origin;
+		object->initial_axis = object->u_data.cylinder.orientation;
+	}
+}
+
+void	object_restore_initial(t_object *object)
+{
+	if (object == NULL)
+		return ;
+	if (object->type == OBJ_SPHERE)
+		object->u_data.sphere.center = object->initial_pos;
+	else if (object->type == OBJ_PLANE)
+	{
+		object->u_data.plane.origin = object->initial_pos;
+		object->u_data.plane.normal = object->initial_axis;
+	}
+	else if (object->type == OBJ_CYLINDER)
+	{
+		object->u_data.cylinder.origin = object->initial_pos;
+		object->u_data.cylinder.orientation = object->initial_axis;
+	}
+}

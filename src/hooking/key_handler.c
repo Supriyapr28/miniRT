@@ -24,6 +24,7 @@
 # define KEY_YAW_C 12
 # define KEY_PITCH_C 1
 # define KEY_PITCH_A 2
+# define KEY_RESET 15 // reset camera and objects
 #else
 # define KEY_ESC 65307 //exit
 # define KEY_UP 65362 //camera up
@@ -36,6 +37,7 @@
 # define KEY_PITCH_Q 113 //ROTATE pitch down
 # define KEY_YAW_S 115 // yaw left
 # define KEY_YAW_D 100 // yaw right
+# define KEY_RESET 114 // reset camera and objects
 #endif
 
 bool		handle_object_key(int keycode, t_object *object);
@@ -96,6 +98,12 @@ int	handle_key(int keycode, void *param)
 	{
 		destroy_app(app);
 		exit(0);
+	}
+	if (keycode == KEY_RESET)
+	{
+		reset_scene_state(app);
+		render_frame(app);
+		return (0);
 	}
 	if (handle_object_key(keycode, app->selected_object))
 	{

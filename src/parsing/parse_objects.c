@@ -62,6 +62,7 @@ int	parse_sphere(t_scene *scene, char **tokens)
 	if (parse_color(tokens[3], &obj->u_data.sphere.color))
 		return (ft_err_handler(scene, ERR_INVALID_COLOR));
 	obj->material = obj->u_data.sphere.color;
+	object_save_initial(obj);
 	return (1);
 }
 
@@ -81,6 +82,7 @@ int	parse_plane(t_scene *scene, char **tokens)
 	if (parse_color(tokens[3], &obj->u_data.plane.color))
 		return (ft_err_handler(scene, ERR_INVALID_COLOR));
 	obj->material = obj->u_data.plane.color;
+	object_save_initial(obj);
 	return (1);
 }
 
@@ -108,5 +110,6 @@ int	parse_cylinder(t_scene *scene, char **tokens)
 	if (parse_color(tokens[5], &obj->u_data.cylinder.color))
 		return (ft_err_handler(scene, ERR_INVALID_COLOR));
 	obj->material = obj->u_data.cylinder.color;
+	object_save_initial(obj);
 	return (1);
 }

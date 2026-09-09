@@ -42,6 +42,7 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/hooking/key_handler.c \
 	$(SRC_DIR)/hooking/object_key_handler.c \
 	$(SRC_DIR)/hooking/mouse_handler.c \
+	$(SRC_DIR)/hooking/reset_handler.c \
 	$(SRC_DIR)/rendering/render.c \
 	$(SRC_DIR)/rendering/render_frame.c \
 	$(SRC_DIR)/camera/camera.c \

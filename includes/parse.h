@@ -54,6 +54,7 @@ typedef struct s_scene
 {
 	t_ambient	ambient;
 	t_camera	camera;
+	t_camera	initial_camera;
 	t_light		light;
 	t_object	*object;
 }	t_scene;
