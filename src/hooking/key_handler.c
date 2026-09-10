@@ -49,9 +49,9 @@ static bool	handle_move_key(int keycode, t_camera *camera)
 	else if (keycode == KEY_PITCH_DOWN)
 		camera_move_up(camera, -CAM_STEP);
 	else if (keycode == KEY_LEFT)
-		camera_move_left(camera, -CAM_STEP);
-	else if (keycode == KEY_RIGHT)
 		camera_move_left(camera, CAM_STEP);
+	else if (keycode == KEY_RIGHT)
+		camera_move_left(camera, -CAM_STEP);
 	else if (keycode == KEY_IN)
 		camera_zoom(camera, CAM_STEP);
 	else if (keycode == KEY_OUT)

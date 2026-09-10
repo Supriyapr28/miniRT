@@ -3,23 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/14 15:20:37 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/10 15:04:20 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
 #define BUFFER_SIZE 64
-
-static int	skip_spaces(const char *str, int i)
-{
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	return (i);
-}
 
 static int	parse_component(const char *str, int i, double *out)
 {

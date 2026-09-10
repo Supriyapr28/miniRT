@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 12:03:57 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/07 13:40:02 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/10 14:54:08 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,52 +24,6 @@ int	create_image(t_mlx *mlx)
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp,
 			&mlx->line_len, &mlx->endian);
 	return (1);
-}
-
-static int	ray_to_color(const t_ray *ray)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (int)((ray->direction.x * 0.5 + 0.5) * 255.0);
-	g = (int)((ray->direction.y * 0.5 + 0.5) * 255.0);
-	b = (int)((ray->direction.z * 0.5 + 0.5) * 255.0);
-	if (r < 0)
-		r = 0;
-	if (r > 255)
-		r = 255;
-	if (g < 0)
-		g = 0;
-	if (g > 255)
-		g = 255;
-	if (b < 0)
-		b = 0;
-	if (b > 255)
-		b = 255;
-	return ((r << 16) | (g << 8) | b);
-}
-
-void	render_color(t_mlx *mlx, const t_scene *scene)
-{
-	int		x;
-	int		y;
-	int		color;
-	t_ray	ray;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			ray = make_camera_ray(scene, x, y);
-			color = ray_to_color(&ray);
-			put_pixel(mlx, x, y, color);
-			x++;
-		}
-		y++;
-	}
 }
 
 t_mlx	*start_mlx(t_app *app)

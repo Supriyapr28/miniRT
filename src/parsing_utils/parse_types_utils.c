@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/14 15:20:37 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/10 15:03:30 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static int	skip_spaces(const char *str, int i)
+int	skip_spaces(const char *str, int i)
 {
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
