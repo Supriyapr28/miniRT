@@ -6,11 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:41 by spaipur-          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2026/09/14 16:59:03 by uvadakku         ###   ########.fr       */
-=======
-/*   Updated: 2026/09/14 10:48:19 by uvadakku         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,17 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-<<<<<<< HEAD
 #    By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/03 12:00:06 by spaipur-          #+#    #+#              #
-#    Updated: 2026/09/10 10:55:09 by uvadakku         ###   ########.fr        #
-=======
-#    By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/09/03 12:00:06 by spaipur-          #+#    #+#              #
-#    Updated: 2026/09/10 15:46:14 by spaipur-         ###   ########.fr        #
->>>>>>> f27fd1ebd2de6149d5ff5b364dbb3514a56f16d5
+#    Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +30,7 @@ MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
 
-<<<<<<< HEAD
 MLX_DIR := minilibx-linux
-=======
-MLX_DIR := .minilibx-linux
-MLX_ARCHIVE := minilibx-linux.tgz
->>>>>>> f27fd1ebd2de6149d5ff5b364dbb3514a56f16d5
 MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
@@ -104,13 +92,8 @@ mlx:
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
-<<<<<<< HEAD
-%.o: %.c mlx
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(MLX_INC) -c $< -o $@
-=======
 %.o: %.c | $(MLX_DIR)
-	$(CC) $(CFLAGS) -I$(INC_DIR) $(MLX_INC) -c $< -o $@
->>>>>>> f27fd1ebd2de6149d5ff5b364dbb3514a56f16d5
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(MLX_INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
