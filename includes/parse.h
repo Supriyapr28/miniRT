@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/10 13:20:13 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:02:25 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,5 @@ void		render_scene(const t_scene *scene, t_image *img);
 bool		trace_ray(const t_scene *scene, const t_ray *ray,
 				t_hit *closest_hit);
 t_color		shade(const t_scene *scene, const t_hit *hit);
-
+int			skip_spaces(const char *str, int i);
 #endif

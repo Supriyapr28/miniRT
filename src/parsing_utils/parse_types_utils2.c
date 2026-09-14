@@ -6,11 +6,12 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/10 17:50:35 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:00:21 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "objects.h"
 
 #define BUFFER_SIZE 64
 
