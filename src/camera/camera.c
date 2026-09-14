@@ -6,13 +6,17 @@
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:24:26 by us                #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2026/09/10 15:09:46 by spaipur-         ###   ########.fr       */
+=======
+/*   Updated: 2026/09/14 16:53:54 by uvadakku         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static t_vec3	camera_world_up(t_vec3 forward)
+t_vec3	camera_world_up(t_vec3 forward)
 {
 	if (vec3_abs(vec3_dot(forward, (t_vec3){0.0, 1.0, 0.0})) > 0.999)
 		return ((t_vec3){0.0, 0.0, 1.0});

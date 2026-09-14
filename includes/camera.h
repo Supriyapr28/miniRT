@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< Updated upstream
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 15:58:56 by us                #+#    #+#             */
 /*   Updated: 2026/09/10 15:10:09 by spaipur-         ###   ########.fr       */
+=======
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/01 15:58:56 by us                #+#    #+#             */
+/*   Updated: 2026/09/14 16:54:42 by uvadakku         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +33,7 @@ typedef struct s_camera_basis
 }	t_camera_basis;
 
 t_camera_basis	camera_get_basis(const t_camera *camera);
+t_vec3			camera_world_up(t_vec3 forward);
 void			camera_move_up(t_camera *camera, double amount);
 void			camera_move_left(t_camera *camera, double amount);
 void			camera_zoom(t_camera *camera, double amount);
