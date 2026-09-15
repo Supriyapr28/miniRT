@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 17:39:05 by us                #+#    #+#             */
-/*   Updated: 2026/09/09 10:44:23 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/10 10:50:57 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static bool	handle_move_key(int keycode, t_camera *camera)
 	else if (keycode == KEY_PITCH_DOWN)
 		camera_move_up(camera, -CAM_STEP);
 	else if (keycode == KEY_LEFT)
-		camera_move_left(camera, -CAM_STEP);
-	else if (keycode == KEY_RIGHT)
 		camera_move_left(camera, CAM_STEP);
+	else if (keycode == KEY_RIGHT)
+		camera_move_left(camera, -CAM_STEP);
 	else if (keycode == KEY_IN)
 		camera_zoom(camera, CAM_STEP);
 	else if (keycode == KEY_OUT)

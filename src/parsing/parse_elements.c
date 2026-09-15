@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 16:28:29 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/07/30 12:25:46 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/11 09:51:03 by us               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "error.h"
 #include "parse.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 int	parse_light(t_scene *scene, char **tokens)
 {

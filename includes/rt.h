@@ -6,7 +6,7 @@
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:55 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/09 14:52:42 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:02:27 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	destroy_mlx(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
 int		create_image(t_mlx *mlx);
 t_mlx	*start_mlx(t_app *app);
-void	render_color(t_mlx *mlx, const t_scene *scene);
+//void	render_color(t_mlx *mlx, const t_scene *scene);
 void	render_frame(t_app *app);
 void	draw_axes(t_app *app);
 void	draw_axes_labels(t_app *app);
@@ -72,7 +72,6 @@ void	object_rotate(t_object *object, t_vec3 axis, double angle);
 
 /* ray tracing */
 t_ray	make_camera_ray(const t_scene *scene, int x, int y);
-t_vec3	ray_at(t_ray ray, double t);
 double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
 			t_vec3 plane_normal);
 bool	hit_sphere(const t_sphere *sphere, const t_ray *ray, t_range range,

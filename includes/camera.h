@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 15:58:56 by us                #+#    #+#             */
-/*   Updated: 2026/09/08 12:55:49 by us               ###   ########.fr       */
+/*   Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_camera_basis
 }	t_camera_basis;
 
 t_camera_basis	camera_get_basis(const t_camera *camera);
+t_vec3			camera_world_up(t_vec3 forward);
 void			camera_move_up(t_camera *camera, double amount);
 void			camera_move_left(t_camera *camera, double amount);
 void			camera_zoom(t_camera *camera, double amount);

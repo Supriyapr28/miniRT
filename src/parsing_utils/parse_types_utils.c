@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/08/14 15:20:37 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/14 16:57:10 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static int	skip_spaces(const char *str, int i)
+int	skip_spaces(const char *str, int i)
 {
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
@@ -55,6 +55,7 @@ int	parse_float(const char *str, double *out)
 	fraction = 0.0;
 	divisor = 1.0;
 	sign = 1;
+
 	i = skip_spaces(str, 0);
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')
