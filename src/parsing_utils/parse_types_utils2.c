@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/10 15:04:20 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:00:21 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "objects.h"
 
 #define BUFFER_SIZE 64
 

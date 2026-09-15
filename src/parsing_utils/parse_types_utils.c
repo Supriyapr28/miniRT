@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_types_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 17:54:27 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/10 15:03:30 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/14 16:57:10 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	parse_float(const char *str, double *out)
 	fraction = 0.0;
 	divisor = 1.0;
 	sign = 1;
+
 	i = skip_spaces(str, 0);
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')

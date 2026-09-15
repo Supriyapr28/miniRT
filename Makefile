@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+         #
+#    By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/03 12:00:06 by spaipur-          #+#    #+#              #
-#    Updated: 2026/09/10 15:46:14 by spaipur-         ###   ########.fr        #
+#    Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := miniRT
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-CPPFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR)
+CPPFLAGS = -I. -I$(INC_DIR) -I$(LIBFT_DIR)
 
 SRC_DIR := src
 INC_DIR := includes
@@ -30,8 +30,7 @@ MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
 
-MLX_DIR := .minilibx-linux
-MLX_ARCHIVE := minilibx-linux.tgz
+MLX_DIR := minilibx-linux
 MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
@@ -87,10 +86,6 @@ mlx:
 	@if [ "$(UNAME_S)" = "Darwin" ]; then \
 		$(MAKE) -C $(MLX_DIR); \
 	else \
-		if [ ! -d "$(MLX_DIR)" ] || [ ! -f "$(MLX_DIR)/Makefile" ]; then \
-			mkdir -p $(MLX_DIR); \
-			tar -xzf $(MLX_ARCHIVE) --strip-components=1 -C $(MLX_DIR); \
-		fi; \
 		$(MAKE) -C $(MLX_DIR); \
 	fi
 
@@ -98,7 +93,7 @@ $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c | $(MLX_DIR)
-	$(CC) $(CFLAGS) -I$(INC_DIR) $(MLX_INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(MLX_INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

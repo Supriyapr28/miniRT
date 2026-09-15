@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene_validation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:53:05 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/08/25 16:36:11 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/10 11:16:08 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

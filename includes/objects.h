@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:41 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/07 11:30:55 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,9 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-/* Distance from the ray origin to the intersection point */
 	double	t;
-/* Exact intersection point in world space */
 	t_vec3	point;
-/* Surface normal at the hit point */
 	t_vec3	normal;
-/* Object color at the hit point */
 	t_color	color;
 }	t_hit;
 

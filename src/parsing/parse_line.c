@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:18:20 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/03 14:18:22 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/10 11:09:43 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "parse.h"
 
 int	get_expected_token_count(char *type)

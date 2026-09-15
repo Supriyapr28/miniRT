@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/10 15:03:59 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:02:25 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			parse_cylinder(t_scene *scene, char **tokens);
 int			parse_float(const char *str, double *out);
 int			parse_vector(const char *str, t_vec3 *out);
 int			parse_color(const char *str, t_color *out);
+int			skip_spaces(const char *str, int i);
 int			validate_ratio(float ratio);
 int			validate_color(t_color color);
 int			validate_normalized_vector(t_vec3 vector);
