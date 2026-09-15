@@ -30,7 +30,8 @@ MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
 
-MLX_DIR := minilibx-linux
+MLX_DIR := .minilibx-linux
+MLX_ARCHIVE := minilibx-linux.tgz
 MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
@@ -93,7 +94,7 @@ $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c | $(MLX_DIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(MLX_INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(MLX_INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
