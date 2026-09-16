@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: us <us@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 12:37:29 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/07/30 12:58:22 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/11 09:51:20 by us               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "objects.h"
 #include <fcntl.h>
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
+#include "libft/libft.h"
+#include "libft/get_next_line.h"
 
 static void	init_scene_defaults(t_scene *scene)
 {

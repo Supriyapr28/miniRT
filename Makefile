@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: us <us@student.42.fr>                      +#+  +:+       +#+         #
+#    By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/03 12:00:06 by spaipur-          #+#    #+#              #
-#    Updated: 2026/09/08 10:08:45 by us               ###   ########.fr        #
+#    Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := miniRT
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-CPPFLAGS = -I$(INC_DIR) -I$(LIBFT_DIR)
+CPPFLAGS = -I. -I$(INC_DIR) -I$(LIBFT_DIR)
 
 SRC_DIR := src
 INC_DIR := includes
@@ -87,10 +87,6 @@ mlx:
 	@if [ "$(UNAME_S)" = "Darwin" ]; then \
 		$(MAKE) -C $(MLX_DIR); \
 	else \
-		if [ ! -d "$(MLX_DIR)" ] || [ ! -f "$(MLX_DIR)/Makefile" ]; then \
-			mkdir -p $(MLX_DIR); \
-			tar -xzf $(MLX_ARCHIVE) --strip-components=1 -C $(MLX_DIR); \
-		fi; \
 		$(MAKE) -C $(MLX_DIR); \
 	fi
 
