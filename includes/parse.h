@@ -14,6 +14,7 @@
 # define PARSE_H
 
 # include "objects.h"
+# include "camera.h"
 # include "error.h"
 # include <stdbool.h>
 # include <stdlib.h>
@@ -34,15 +35,6 @@ typedef struct s_atof
 	int		sign;
 }	t_atof;
 
-typedef struct s_camera
-{
-	int		id;
-	int		is_set;
-	t_vec3	coordinates;
-	t_vec3	direction;
-	double	fov;
-}	t_camera;
-
 typedef struct s_light
 {
 	t_vec3	origin;
@@ -58,18 +50,6 @@ typedef struct s_scene
 	t_light		light;
 	t_object	*object;
 }	t_scene;
-
-typedef struct s_image
-{
-	int		width;
-	int		height;
-	int		bpp;
-	int		line_length;
-	int		endian;
-	void	*mlx_img;
-	char	*addr;
-	t_color	*pixels;
-}	t_image;
 
 t_scene		*parse_scene(const char *path);
 void		free_scene(t_scene *scene);
@@ -100,9 +80,4 @@ size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
 bool		solve_quadratic(double a, double b, double c, t_range range,
 				double *t);
-void		render_scene(const t_scene *scene, t_image *img);
-bool		find_hit(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-t_color		compute_color(const t_scene *scene, const t_hit *hit);
-
 #endif

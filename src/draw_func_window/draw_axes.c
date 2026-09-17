@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_internal.h"
 #include "rt.h"
 
 void	project_axis(const t_camera *camera, t_vec3 axis, int *screen_x,

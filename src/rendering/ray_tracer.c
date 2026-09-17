@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include "objects.h"
-#include "parse.h"
-#include "draw_internal.h"
-#include "camera.h"
 #include <float.h>
 #include <math.h>
 
@@ -22,50 +18,27 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-static int	color_to_int(t_color color)
+static t_vec3	camera_world_up(t_vec3 forward)
 {
-	int	r;
-	int	g;
-	int	b;
-
-	r = color.r;
-	g = color.g;
-	b = color.b;
-	if (r < 0)
-		r = 0;
-	if (r > 255)
-		r = 255;
-	if (g < 0)
-		g = 0;
-	if (g > 255)
-		g = 255;
-	if (b < 0)
-		b = 0;
-	if (b > 255)
-		b = 255;
-	return ((r << 16) | (g << 8) | b);
+	if (vec3_abs(vec3_dot(forward, (t_vec3){0.0, 1.0, 0.0})) > 0.999)
+		return ((t_vec3){0.0, 0.0, 1.0});
+	return ((t_vec3){0.0, 1.0, 0.0});
 }
 
-static void	set_pixel(t_image *img, int x, int y, t_color color)
+t_camera_basis	camera_get_basis(const t_camera *camera)
 {
-	int		index;
-	char	*dst;
+	t_camera_basis	basis;
 
-	if (img == NULL)
-		return ;
-	if (x < 0 || y < 0 || x >= img->width || y >= img->height)
-		return ;
-	if (img->addr != NULL && img->line_length > 0 && img->bpp > 0)
-	{
-		index = (y * img->line_length) + (x * (img->bpp / 8));
-		dst = img->addr + index;
-		*(unsigned int *)dst = (unsigned int)color_to_int(color);
-	}
-	else if (img->pixels != NULL)
-	{
-		index = (y * img->width) + x;
-		img->pixels[index] = color;
-	}
+	if (camera == NULL)
+		return ((t_camera_basis){(t_vec3){0.0, 0.0, 0.0},
+			(t_vec3){0.0, 0.0, 0.0}, (t_vec3){0.0, 0.0, 0.0}});
+	basis.forward = vec3_normalize(camera->direction);
+	basis.up = camera_world_up(basis.forward);
+	basis.right = vec3_cross(basis.up, basis.forward);
+	basis.right = vec3_normalize(basis.right);
+	basis.up = vec3_cross(basis.forward, basis.right);
+	basis.up = vec3_normalize(basis.up);
+	return (basis);
 }
 
 t_ray	shoot_ray(const t_scene *scene, int x, int y)
@@ -88,41 +61,3 @@ t_ray	shoot_ray(const t_scene *scene, int x, int y)
 	ray.direction = vec3_normalize(ray.direction);
 	return (ray);
 }
-
-void	render_pixel(const t_scene *scene, t_image *img, int x, int y)
-{
-	t_ray	ray;
-	t_hit	hit;
-	t_color	color;
-	bool	hit_any;
-
-	ray = shoot_ray(scene, x, y);
-	hit_any = find_hit(scene, &ray, &hit);
-	if (hit_any)
-		color = compute_color(scene, &hit);
-	else
-		color = (t_color){0, 0, 0};
-	set_pixel(img, x, y, color);
-}
-
-void	render_scene(const t_scene *scene, t_image *img)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			render_pixel(scene, img, x, y);
-			x++;
-		}
-		y++;
-	}
-}
-
-
-
-

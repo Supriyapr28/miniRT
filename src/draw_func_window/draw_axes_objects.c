@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_internal.h"
 #include "rt.h"
 
 static int	color_to_int(t_color color)

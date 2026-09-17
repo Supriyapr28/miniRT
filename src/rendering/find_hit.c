@@ -14,7 +14,7 @@
 
 #include <float.h>
 
-double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
+static double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
 			t_vec3 plane_normal)
 {
 	double	denom;
@@ -58,7 +58,7 @@ static bool	check_object_hit(t_object *obj, const t_ray *ray,
 	return (false);
 }
 
-static bool	intersect_all_objects(const t_scene *scene, const t_ray *ray,
+bool	find_hit(const t_scene *scene, const t_ray *ray,
 			t_hit *closest_hit)
 {
 	t_object	*current;
@@ -66,6 +66,7 @@ static bool	intersect_all_objects(const t_scene *scene, const t_ray *ray,
 	t_range		range;
 	bool		hit_anything;
 
+	closest_hit->t = DBL_MAX;
 	current = scene->object;
 	hit_anything = false;
 	while (current != NULL)
@@ -80,13 +81,6 @@ static bool	intersect_all_objects(const t_scene *scene, const t_ray *ray,
 		current = current->next;
 	}
 	return (hit_anything);
-}
-
-bool	find_hit(const t_scene *scene, const t_ray *ray,
-			t_hit *closest_hit)
-{
-	closest_hit->t = DBL_MAX;
-	return (intersect_all_objects(scene, ray, closest_hit));
 }
 
 

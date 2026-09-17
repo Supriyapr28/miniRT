@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_internal.h"
 #include "rt.h"
 
 static void	init_algo(t_line_draw *line, t_line_algo *algo)
