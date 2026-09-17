@@ -31,7 +31,7 @@ static void	build_cylinder_quad(const t_ray *ray, const t_cylinder *cyl,
 		- cyl->radius * cyl->radius;
 }
 
-static bool	solve_cylinder_quadratic(const t_ray *ray,
+static bool	cyl_quadratic(const t_ray *ray,
 			const t_cylinder *cyl, t_range range, double *out_t)
 {
 	t_cyl_quad	q;
@@ -50,7 +50,7 @@ static bool	intersect_lateral(const t_ray *ray, const t_cylinder *cyl,
 	t_vec3	axis_vec;
 	double	axis_dist;
 
-	if (!solve_cylinder_quadratic(ray, cyl, range, &t))
+	if (!cyl_quadratic(ray, cyl, range, &t))
 		return (false);
 	p = vec3_add(ray->origin, vec3_scale(ray->direction, t));
 	axis_vec = vec3_sub(p, cyl->origin);

@@ -14,7 +14,7 @@
 
 #include <math.h>
 
-static bool	sphere_solve(const t_sphere *sphere, const t_ray *ray,
+static bool	intersect_sphere(const t_sphere *sphere, const t_ray *ray,
 			t_range range, double *t)
 {
 	t_vec3	oc;
@@ -34,7 +34,7 @@ bool	hit_sphere(const t_sphere *sphere, const t_ray *ray,
 {
 	double	t;
 
-	if (!sphere_solve(sphere, ray, range, &t))
+	if (!intersect_sphere(sphere, ray, range, &t))
 		return (false);
 	hit->t = (float)t;
 	hit->point = vec3_add(ray->origin, vec3_scale(ray->direction, t));

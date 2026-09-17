@@ -75,7 +75,7 @@ t_mlx	*start_mlx(t_app *app)
 	if (create_image(mlx) == 0)
 		return (NULL);
 	app->mlx = mlx;
-	render_frame(app);
+	render_scene(app);
 	return (mlx);
 }
 

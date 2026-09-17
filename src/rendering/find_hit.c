@@ -14,7 +14,7 @@
 
 #include <float.h>
 
-static double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
+static double	intersect_plane(t_ray ray, t_vec3 plane_point,
 			t_vec3 plane_normal)
 {
 	double	denom;
@@ -36,7 +36,7 @@ bool	hit_plane(const t_plane *pl, const t_ray *ray, t_range range,
 {
 	double	t;
 
-	t = ray_plane_intersection(*ray, pl->origin, pl->normal);
+	t = intersect_plane(*ray, pl->origin, pl->normal);
 	if (t < range.min || t > range.max)
 		return (false);
 	hit->t = t;
