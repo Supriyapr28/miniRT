@@ -35,26 +35,11 @@ static bool	solve_cylinder_quadratic(const t_ray *ray,
 			const t_cylinder *cyl, t_range range, double *out_t)
 {
 	t_cyl_quad	q;
-	double		discriminant;
-	double		sqrt_d;
-	double		t;
 
 	build_cylinder_quad(ray, cyl, &q);
 	if (vec3_abs(q.a) < 1e-15)
 		return (false);
-	discriminant = q.b * q.b - 4.0 * q.a * q.c;
-	if (discriminant < 0.0)
-		return (false);
-	sqrt_d = sqrt(discriminant);
-	t = (-q.b - sqrt_d) / (2.0 * q.a);
-	if (t < range.min || t > range.max)
-	{
-		t = (-q.b + sqrt_d) / (2.0 * q.a);
-		if (t < range.min || t > range.max)
-			return (false);
-	}
-	*out_t = t;
-	return (true);
+	return (solve_quadratic(q.a, q.b, q.c, range, out_t));
 }
 
 static bool	intersect_lateral(const t_ray *ray, const t_cylinder *cyl,

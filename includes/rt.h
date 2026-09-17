@@ -43,12 +43,6 @@ typedef struct s_app
 	t_object	*selected_object;
 }	t_app;
 
-typedef struct s_range
-{
-	double	min;
-	double	max;
-}	t_range;
-
 /* hooks */
 int		handle_key(int keycode, void *param);
 int		handle_mouse(int button, int x, int y, void *param);
@@ -61,7 +55,6 @@ void	reset_scene_state(t_app *app);
 t_mlx	*init_mlx(void);
 void	destroy_mlx(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
-int		create_image(t_mlx *mlx);
 t_mlx	*start_mlx(t_app *app);
 //void	render_color(t_mlx *mlx, const t_scene *scene);
 void	render_frame(t_app *app);
@@ -71,7 +64,7 @@ void	object_translate(t_object *object, t_vec3 delta);
 void	object_rotate(t_object *object, t_vec3 axis, double angle);
 
 /* ray tracing */
-t_ray	make_camera_ray(const t_scene *scene, int x, int y);
+t_ray	shoot_ray(const t_scene *scene, int x, int y);
 double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
 			t_vec3 plane_normal);
 bool	hit_sphere(const t_sphere *sphere, const t_ray *ray, t_range range,

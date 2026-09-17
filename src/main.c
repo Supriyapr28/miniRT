@@ -12,7 +12,36 @@
 
 #include "rt.h"
 
-int	create_image(t_mlx *mlx)
+t_mlx	*init_mlx(void)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)malloc(sizeof(*mlx));
+	if (mlx == NULL)
+		return (NULL);
+	mlx->mlx = mlx_init();
+	if (mlx->mlx == NULL)
+	{
+		free(mlx);
+		return (NULL);
+	}
+	mlx->win = NULL;
+	mlx->img = NULL;
+	mlx->addr = NULL;
+	mlx->bpp = 0;
+	mlx->line_len = 0;
+	mlx->endian = 0;
+	return (mlx);
+}
+
+void	setup_hooks(t_app *app)
+{
+	mlx_hook(app->mlx->win, 2, 1L << 0, handle_key, app);
+	mlx_mouse_hook(app->mlx->win, handle_mouse, app);
+	mlx_hook(app->mlx->win, 17, 0, handle_close, app);
+}
+
+static int	create_image(t_mlx *mlx)
 {
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (mlx->img == NULL)

@@ -42,6 +42,17 @@ static void	bresenham_step(t_line_algo *algo, int *e2)
 		algo->y0 += algo->sy;
 	}
 }
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dst;
+
+	if (mlx == NULL || mlx->addr == NULL)
+		return ;
+	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+		return ;
+	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
+	*(unsigned int *)dst = (unsigned int)color;
+}
 
 void	draw_line_internal(t_line_draw *line)
 {

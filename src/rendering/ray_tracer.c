@@ -22,7 +22,53 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-t_ray	make_camera_ray(const t_scene *scene, int x, int y)
+static int	color_to_int(t_color color)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = color.r;
+	g = color.g;
+	b = color.b;
+	if (r < 0)
+		r = 0;
+	if (r > 255)
+		r = 255;
+	if (g < 0)
+		g = 0;
+	if (g > 255)
+		g = 255;
+	if (b < 0)
+		b = 0;
+	if (b > 255)
+		b = 255;
+	return ((r << 16) | (g << 8) | b);
+}
+
+static void	set_pixel(t_image *img, int x, int y, t_color color)
+{
+	int		index;
+	char	*dst;
+
+	if (img == NULL)
+		return ;
+	if (x < 0 || y < 0 || x >= img->width || y >= img->height)
+		return ;
+	if (img->addr != NULL && img->line_length > 0 && img->bpp > 0)
+	{
+		index = (y * img->line_length) + (x * (img->bpp / 8));
+		dst = img->addr + index;
+		*(unsigned int *)dst = (unsigned int)color_to_int(color);
+	}
+	else if (img->pixels != NULL)
+	{
+		index = (y * img->width) + x;
+		img->pixels[index] = color;
+	}
+}
+
+t_ray	shoot_ray(const t_scene *scene, int x, int y)
 {
 	t_camera_basis	basis;
 	t_ray			ray;
@@ -43,40 +89,40 @@ t_ray	make_camera_ray(const t_scene *scene, int x, int y)
 	return (ray);
 }
 
-double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
-			t_vec3 plane_normal)
+void	render_pixel(const t_scene *scene, t_image *img, int x, int y)
 {
-	double	denom;
-	double	numerator;
-	double	t;
+	t_ray	ray;
+	t_hit	hit;
+	t_color	color;
+	bool	hit_any;
 
-	denom = vec3_dot(ray.direction, plane_normal);
-	if (vec3_abs(denom) < 1e-12)
-		return (DBL_MAX);
-	numerator = vec3_dot(vec3_sub(plane_point, ray.origin),
-			plane_normal);
-	t = numerator / denom;
-	if (t < 0.0)
-		return (DBL_MAX);
-	return (t);
+	ray = shoot_ray(scene, x, y);
+	hit_any = find_hit(scene, &ray, &hit);
+	if (hit_any)
+		color = compute_color(scene, &hit);
+	else
+		color = (t_color){0, 0, 0};
+	set_pixel(img, x, y, color);
 }
 
-static t_vec3	ray_at(t_ray ray, double t)
+void	render_scene(const t_scene *scene, t_image *img)
 {
-	return (vec3_add(ray.origin, vec3_scale(ray.direction, t)));
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			render_pixel(scene, img, x, y);
+			x++;
+		}
+		y++;
+	}
 }
 
-bool	hit_plane(const t_plane *pl, const t_ray *ray, t_range range,
-		t_hit *hit)
-{
-	double	t;
 
-	t = ray_plane_intersection(*ray, pl->origin, pl->normal);
-	if (t < range.min || t > range.max)
-		return (false);
-	hit->t = t;
-	hit->point = ray_at(*ray, t);
-	hit->normal = pl->normal;
-	hit->color = pl->color;
-	return (true);
-}
+
+

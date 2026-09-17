@@ -43,4 +43,9 @@ typedef struct s_line_algo
 	int		err;
 }			t_line_algo;
 
+void	draw_line_internal(t_line_draw *line);
+void	project_axis(const t_camera *camera, t_vec3 axis, int *screen_x,
+			int *screen_y);
+void	draw_object_markers(t_app *app);
+
 #endif

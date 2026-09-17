@@ -28,65 +28,33 @@ static t_vec3	rotate_vector(t_vec3 vector, t_vec3 axis, double angle)
 				vec3_scale(cross, sin(angle)))));
 }
 
+static t_vec3	*get_axis(t_object *obj)
+{
+	if (obj->type == OBJ_PLANE)
+		return (&obj->u_data.plane.normal);
+	if (obj->type == OBJ_CYLINDER)
+		return (&obj->u_data.cylinder.orientation);
+	return (NULL);
+}
+
 void	object_translate(t_object *object, t_vec3 delta)
 {
+	t_vec3	*pos;
+
 	if (object == NULL)
 		return ;
-	if (object->type == OBJ_SPHERE)
-		object->u_data.sphere.center = vec3_add
-			(object->u_data.sphere.center, delta);
-	else if (object->type == OBJ_PLANE)
-		object->u_data.plane.origin = vec3_add
-			(object->u_data.plane.origin, delta);
-	else if (object->type == OBJ_CYLINDER)
-		object->u_data.cylinder.origin = vec3_add
-			(object->u_data.cylinder.origin, delta);
+	pos = object_get_position(object);
+	if (pos != NULL)
+		*pos = vec3_add(*pos, delta);
 }
 
 void	object_rotate(t_object *object, t_vec3 axis, double angle)
 {
-	if (object == NULL)
-		return ;
-	if (object->type == OBJ_PLANE)
-		object->u_data.plane.normal = vec3_normalize
-			(rotate_vector(object->u_data.plane.normal, axis, angle));
-	else if (object->type == OBJ_CYLINDER)
-		object->u_data.cylinder.orientation = vec3_normalize
-			(rotate_vector(object->u_data.cylinder.orientation, axis, angle));
-}
+	t_vec3	*obj_axis;
 
-void	object_save_initial(t_object *object)
-{
 	if (object == NULL)
 		return ;
-	if (object->type == OBJ_SPHERE)
-		object->initial_pos = object->u_data.sphere.center;
-	else if (object->type == OBJ_PLANE)
-	{
-		object->initial_pos = object->u_data.plane.origin;
-		object->initial_axis = object->u_data.plane.normal;
-	}
-	else if (object->type == OBJ_CYLINDER)
-	{
-		object->initial_pos = object->u_data.cylinder.origin;
-		object->initial_axis = object->u_data.cylinder.orientation;
-	}
-}
-
-void	object_restore_initial(t_object *object)
-{
-	if (object == NULL)
-		return ;
-	if (object->type == OBJ_SPHERE)
-		object->u_data.sphere.center = object->initial_pos;
-	else if (object->type == OBJ_PLANE)
-	{
-		object->u_data.plane.origin = object->initial_pos;
-		object->u_data.plane.normal = object->initial_axis;
-	}
-	else if (object->type == OBJ_CYLINDER)
-	{
-		object->u_data.cylinder.origin = object->initial_pos;
-		object->u_data.cylinder.orientation = object->initial_axis;
-	}
+	obj_axis = get_axis(object);
+	if (obj_axis != NULL)
+		*obj_axis = vec3_normalize(rotate_vector(*obj_axis, axis, angle));
 }

@@ -35,6 +35,12 @@ typedef struct s_ray
 	t_vec3	direction;
 }	t_ray;
 
+typedef struct s_range
+{
+	double	min;
+	double	max;
+}	t_range;
+
 typedef struct s_hit
 {
 	double	t;
@@ -137,5 +143,6 @@ double	vec3_abs(double value);
 
 void	object_save_initial(t_object *object);
 void	object_restore_initial(t_object *object);
+t_vec3	*object_get_position(t_object *obj);
 
 #endif

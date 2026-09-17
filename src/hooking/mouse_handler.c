@@ -60,7 +60,7 @@ int	handle_mouse(int button, int x, int y, void *param)
 	if (app == NULL || app->scene == NULL || button != 1
 		|| x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return (0);
-	ray = make_camera_ray(app->scene, x, y);
+	ray = shoot_ray(app->scene, x, y);
 	app->selected_object = pick_object(app->scene, &ray);
 	render_frame(app);
 	return (0);

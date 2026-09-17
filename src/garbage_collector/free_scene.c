@@ -12,6 +12,22 @@
 
 #include <stdlib.h>
 #include "parse.h"
+#include "rt.h"
+
+void	free_tokens(char **tokens)
+{
+	int	i;
+
+	if (!tokens)
+		return ;
+	i = 0;
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free(tokens);
+}
 
 void	free_scene(t_scene *scene)
 {
@@ -29,3 +45,4 @@ void	free_scene(t_scene *scene)
 	}
 	free(scene);
 }
+

@@ -83,7 +83,7 @@ static t_color	compute_diffuse(const t_scene *scene, const t_hit *hit)
 	return (diffuse);
 }
 
-t_color	shade(const t_scene *scene, const t_hit *hit)
+t_color	compute_color(const t_scene *scene, const t_hit *hit)
 {
 	t_color	ambient;
 	t_color	diffuse;

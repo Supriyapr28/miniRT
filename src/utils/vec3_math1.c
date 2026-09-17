@@ -12,7 +12,28 @@
 
 #include "objects.h"
 #include <float.h>
+#include <math.h>
 #include "rt.h"
+
+bool	solve_quadratic(double a, double b, double c, t_range range,
+		double *t)
+{
+	double	discriminant;
+	double	sqrt_d;
+
+	discriminant = b * b - 4.0 * a * c;
+	if (discriminant < 0.0)
+		return (false);
+	sqrt_d = sqrt(discriminant);
+	*t = (-b - sqrt_d) / (2.0 * a);
+	if (*t < range.min || *t > range.max)
+	{
+		*t = (-b + sqrt_d) / (2.0 * a);
+		if (*t < range.min || *t > range.max)
+			return (false);
+	}
+	return (true);
+}
 
 double	vec3_abs(double value)
 {

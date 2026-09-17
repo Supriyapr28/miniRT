@@ -12,6 +12,18 @@
 
 #include "parse.h"
 
+size_t	array_size(char **arr)
+{
+	size_t	len;
+
+	if (!arr)
+		return (0);
+	len = 0;
+	while (arr[len])
+		len++;
+	return (len);
+}
+
 int	skip_spaces(const char *str, int i)
 {
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))

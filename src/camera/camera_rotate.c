@@ -12,14 +12,21 @@
 
 #include "camera.h"
 
+static void	rotate_around_axis(t_camera *camera, t_vec3 axis, double angle)
+{
+	t_vec3	rotated;
+
+	rotated = vec3_add(camera->direction,
+			vec3_scale(axis, angle));
+	camera->direction = vec3_normalize(rotated);
+}
+
 void	camera_rotate_yaw(t_camera *camera, double angle)
 {
 	t_camera_basis	basis;
 
 	basis = camera_get_basis(camera);
-	basis.up = vec3_scale(basis.up, angle);
-	basis.up = vec3_add(camera->direction, basis.up);
-	camera->direction = vec3_normalize(basis.up);
+	rotate_around_axis(camera, basis.up, angle);
 }
 
 void	camera_rotate_pitch(t_camera *camera, double angle)
@@ -27,7 +34,5 @@ void	camera_rotate_pitch(t_camera *camera, double angle)
 	t_camera_basis	basis;
 
 	basis = camera_get_basis(camera);
-	basis.right = vec3_scale(basis.right, angle);
-	basis.right = vec3_add(camera->direction, basis.right);
-	camera->direction = vec3_normalize(basis.right);
+	rotate_around_axis(camera, basis.right, angle);
 }

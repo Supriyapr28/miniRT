@@ -98,15 +98,11 @@ int			validate_tokens(t_scene *scene, char **tokens);
 void		free_tokens(char **tokens);
 size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
-bool		intersect_planes(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-bool		intersect_spheres(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-bool		intersect_cylinder(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
+bool		solve_quadratic(double a, double b, double c, t_range range,
+				double *t);
 void		render_scene(const t_scene *scene, t_image *img);
-bool		trace_ray(const t_scene *scene, const t_ray *ray,
+bool		find_hit(const t_scene *scene, const t_ray *ray,
 				t_hit *closest_hit);
-t_color		shade(const t_scene *scene, const t_hit *hit);
-int			skip_spaces(const char *str, int i);
+t_color		compute_color(const t_scene *scene, const t_hit *hit);
+
 #endif

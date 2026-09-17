@@ -13,6 +13,16 @@
 #include "parse.h"
 #include <stdlib.h>
 
+static int	finalize_object(t_scene *scene, t_object *obj, char *color_token,
+		t_color *color_ptr)
+{
+	if (parse_color(color_token, color_ptr))
+		return (ft_err_handler(scene, ERR_INVALID_COLOR));
+	obj->material = *color_ptr;
+	object_save_initial(obj);
+	return (1);
+}
+
 t_object	*add_object(t_scene *scene, t_obj_type type)
 {
 	t_object	*new_obj;
@@ -59,11 +69,8 @@ int	parse_sphere(t_scene *scene, char **tokens)
 	if (parse_size(scene, tokens[2], &diameter, ERR_DIAMETER) < 0)
 		return (-1);
 	obj->u_data.sphere.radius = diameter / 2.0;
-	if (parse_color(tokens[3], &obj->u_data.sphere.color))
-		return (ft_err_handler(scene, ERR_INVALID_COLOR));
-	obj->material = obj->u_data.sphere.color;
-	object_save_initial(obj);
-	return (1);
+	return (finalize_object(scene, obj, tokens[3],
+			&obj->u_data.sphere.color));
 }
 
 int	parse_plane(t_scene *scene, char **tokens)
@@ -79,11 +86,8 @@ int	parse_plane(t_scene *scene, char **tokens)
 		return (ft_err_handler(scene, ERR_INVALID_DIRECT));
 	if (validate_normalized_vector(obj->u_data.plane.normal))
 		return (ft_err_handler(scene, ERR_VECTOR_RANGE));
-	if (parse_color(tokens[3], &obj->u_data.plane.color))
-		return (ft_err_handler(scene, ERR_INVALID_COLOR));
-	obj->material = obj->u_data.plane.color;
-	object_save_initial(obj);
-	return (1);
+	return (finalize_object(scene, obj, tokens[3],
+			&obj->u_data.plane.color));
 }
 
 int	parse_cylinder(t_scene *scene, char **tokens)
@@ -107,9 +111,6 @@ int	parse_cylinder(t_scene *scene, char **tokens)
 	if (parse_size(scene, tokens[4], &height, ERR_HEIGHT) < 0)
 		return (-1);
 	obj->u_data.cylinder.half_height = height / 2.0;
-	if (parse_color(tokens[5], &obj->u_data.cylinder.color))
-		return (ft_err_handler(scene, ERR_INVALID_COLOR));
-	obj->material = obj->u_data.cylinder.color;
-	object_save_initial(obj);
-	return (1);
+	return (finalize_object(scene, obj, tokens[5],
+			&obj->u_data.cylinder.color));
 }
