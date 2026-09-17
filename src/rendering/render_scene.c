@@ -89,7 +89,7 @@ static t_image	image_from_mlx(t_mlx *mlx)
 	return (image);
 }
 
-void	render_frame(t_app *app)
+void	render_scene(t_app *app)
 {
 	t_image	image;
 	int		x;

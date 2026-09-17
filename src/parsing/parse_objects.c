@@ -23,7 +23,7 @@ static int	finalize_object(t_scene *scene, t_object *obj, char *color_token,
 	return (1);
 }
 
-t_object	*add_object(t_scene *scene, t_obj_type type)
+static t_object	*add_object(t_scene *scene, t_obj_type type)
 {
 	t_object	*new_obj;
 	t_object	*current;

@@ -52,19 +52,15 @@ typedef struct s_scene
 }	t_scene;
 
 t_scene		*parse_scene(const char *path);
-void		free_scene(t_scene *scene);
+int			parse_sphere(t_scene *scene, char **tokens);
+int			parse_plane(t_scene *scene, char **tokens);
+int			parse_cylinder(t_scene *scene, char **tokens);
+
 char		*trim_line(t_scene *scene, char *line);
 int			is_skippable_line(char *line);
 char		**create_tokens(t_scene *scene, char *line);
 int			get_expected_token_count(char *type);
 int			dispatch_scene_parsing(t_scene *scene, char **tokens);
-int			parse_ambient(t_scene *scene, char **tokens);
-int			parse_camera(t_scene *scene, char **tokens);
-int			parse_light(t_scene *scene, char **tokens);
-t_object	*add_object(t_scene *scene, t_obj_type type);
-int			parse_sphere(t_scene *scene, char **tokens);
-int			parse_plane(t_scene *scene, char **tokens);
-int			parse_cylinder(t_scene *scene, char **tokens);
 int			parse_float(const char *str, double *out);
 int			parse_vector(const char *str, t_vec3 *out);
 int			parse_color(const char *str, t_color *out);
@@ -80,4 +76,5 @@ size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
 bool		solve_quadratic(double a, double b, double c, t_range range,
 				double *t);
+void		free_scene(t_scene *scene);
 #endif

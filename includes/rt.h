@@ -96,7 +96,7 @@ void	destroy_mlx(t_mlx *mlx);
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
 
 //rendering frame 
-void	render_frame(t_app *app);
+void	render_scene(t_app *app);
 
 /* ray tracing */
 t_ray	shoot_ray(const t_scene *scene, int x, int y);

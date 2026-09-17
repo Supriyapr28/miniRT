@@ -15,7 +15,7 @@
 #include "parse.h"
 #include "libft/libft.h"
 
-int	parse_light(t_scene *scene, char **tokens)
+static int	parse_light(t_scene *scene, char **tokens)
 {
 	if (parse_vector(tokens[1], &scene->light.origin))
 		return (ft_err_handler(scene, ERR_INVALID_COORD));
@@ -28,7 +28,7 @@ int	parse_light(t_scene *scene, char **tokens)
 	return (1);
 }
 
-int	parse_camera(t_scene *scene, char **tokens)
+static int	parse_camera(t_scene *scene, char **tokens)
 {
 	if (scene->camera.is_set)
 		return (ft_err_handler(scene, ERR_OVER_CAMERA));
@@ -47,7 +47,7 @@ int	parse_camera(t_scene *scene, char **tokens)
 	return (1);
 }
 
-int	parse_ambient(t_scene *scene, char **tokens)
+static int	parse_ambient(t_scene *scene, char **tokens)
 {
 	double	ratio;
 	t_color	color;

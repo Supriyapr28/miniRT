@@ -35,12 +35,12 @@ MLX_INC := -I$(MLX_DIR)
 MLX_LIB := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 endif
 
-SRC := $(SRC_DIR)/main.c \
+SRC := $(SRC_DIR)/ray_tracer.c \
 	$(SRC_DIR)/hooking/key_handler.c \
 	$(SRC_DIR)/hooking/object_key_handler.c \
 	$(SRC_DIR)/hooking/mouse_handler.c \
 	$(SRC_DIR)/hooking/reset_handler.c \
-	$(SRC_DIR)/rendering/render_frame.c \
+	$(SRC_DIR)/rendering/render_scene.c \
 	$(SRC_DIR)/camera/camera_move.c \
 	$(SRC_DIR)/camera/camera_rotate.c \
 	$(SRC_DIR)/draw_func_window/draw_axes.c \
@@ -62,7 +62,7 @@ SRC := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/utils/vec3_math1.c \
 	$(SRC_DIR)/utils/object_transform.c \
 	$(SRC_DIR)/utils/object_state.c \
-	$(SRC_DIR)/rendering/ray_tracer.c \
+	$(SRC_DIR)/rendering/cast_ray.c \
 	$(SRC_DIR)/rendering/hit_sphere.c \
 	$(SRC_DIR)/rendering/hit_cylinder.c \
 	$(SRC_DIR)/rendering/hit_cyl_helper.c \
