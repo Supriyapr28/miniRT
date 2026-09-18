@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 12:00:00 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/07 11:21:51 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:05 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,6 @@ static t_color	compute_ambient(const t_scene *scene, const t_hit *hit)
 			* color_ratio(scene->ambient.color.b));
 	return (ambient);
 }
-static t_ray	make_shadow_ray(const t_hit *hit, const t_scene *scene)
-{
-	t_ray	shadow;
-	t_vec3	to_light;
-
-	shadow.origin = vec3_add(hit->point, vec3_scale(hit->normal, 0.001));
-	to_light = vec3_sub(scene->light.origin, hit->point);
-	shadow.direction = vec3_normalize(to_light);
-	return (shadow);
-}
 
 static t_color	compute_diffuse(const t_scene *scene, const t_hit *hit)
 {
@@ -77,7 +67,9 @@ static t_color	compute_diffuse(const t_scene *scene, const t_hit *hit)
 	double	diff;
 	t_color	diffuse;
 
-	shadow_ray = make_shadow_ray(hit, scene);
+	shadow_ray.origin = vec3_add(hit->point, vec3_scale(hit->normal, 0.001));
+	shadow_ray.direction = vec3_normalize(
+			vec3_sub(scene->light.origin, hit->point));
 	if (is_occluded(scene, &shadow_ray, hit))
 		return ((t_color){0, 0, 0});
 	diff = vec3_dot(hit->normal, shadow_ray.direction);

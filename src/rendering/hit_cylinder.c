@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_cylinder.c                                     :+:      :+:    :+:   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:47:25 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/09 11:16:22 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:15 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,17 @@ static void	build_cylinder_quad(const t_ray *ray, const t_cylinder *cyl,
 static bool	cyl_quadratic(const t_ray *ray,
 			const t_cylinder *cyl, t_range range, double *out_t)
 {
-	t_cyl_quad	q;
+	t_cyl_quad		q;
+	t_quad_params	params;
 
 	build_cylinder_quad(ray, cyl, &q);
 	if (vec3_abs(q.a) < 1e-15)
 		return (false);
-	return (solve_quadratic(q.a, q.b, q.c, range, out_t));
+	params.a = q.a;
+	params.b = q.b;
+	params.c = q.c;
+	params.range = range;
+	return (solve_quadratic(&params, out_t));
 }
 
 static bool	intersect_lateral(const t_ray *ray, const t_cylinder *cyl,

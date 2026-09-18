@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_sphere.c                                       :+:      :+:    :+:   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 12:00:00 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/03 12:05:00 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:14 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 static bool	intersect_sphere(const t_sphere *sphere, const t_ray *ray,
 			t_range range, double *t)
 {
-	t_vec3	oc;
-	double	a;
-	double	b;
-	double	c;
+	t_vec3			oc;
+	t_quad_params	params;
 
 	oc = vec3_sub(ray->origin, sphere->center);
-	a = vec3_dot(ray->direction, ray->direction);
-	b = 2.0 * vec3_dot(oc, ray->direction);
-	c = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
-	return (solve_quadratic(a, b, c, range, t));
+	params.a = vec3_dot(ray->direction, ray->direction);
+	params.b = 2.0 * vec3_dot(oc, ray->direction);
+	params.c = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
+	params.range = range;
+	return (solve_quadratic(&params, t));
 }
 
 bool	hit_sphere(const t_sphere *sphere, const t_ray *ray,

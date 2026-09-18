@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_axes_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:03:43 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:27:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/09/18 10:43:15 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	bresenham_step(t_line_algo *algo, int *e2)
 		algo->y0 += algo->sy;
 	}
 }
+
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;

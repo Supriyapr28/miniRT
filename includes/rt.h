@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:55 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/14 17:02:27 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:13 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ bool	try_cap_update(const t_ray *ray, const t_cap_params *cap,
 			t_cap_hit *best);
 
 /* lighting */
-t_color		compute_color(const t_scene *scene, const t_hit *hit);
-double		color_ratio(int channel);
-int			clamp_channel(double value);
+t_color	compute_color(const t_scene *scene, const t_hit *hit);
+double	color_ratio(int channel);
+int		clamp_channel(double value);
 
 //draw graph
 void	draw_axes(t_app *app);

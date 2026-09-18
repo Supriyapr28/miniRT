@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/14 17:02:25 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:08 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char		**create_tokens(t_scene *scene, char *line);
 int			get_expected_token_count(char *type);
 int			dispatch_scene_parsing(t_scene *scene, char **tokens);
 int			parse_float(const char *str, double *out);
+int			parse_size(t_scene *scene, char *token, double *value,
+				const char *msg);
 int			parse_vector(const char *str, t_vec3 *out);
 int			parse_color(const char *str, t_color *out);
 int			skip_spaces(const char *str, int i);
@@ -74,7 +76,6 @@ int			validate_tokens(t_scene *scene, char **tokens);
 void		free_tokens(char **tokens);
 size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
-bool		solve_quadratic(double a, double b, double c, t_range range,
-				double *t);
+bool		solve_quadratic(const t_quad_params *params, double *t);
 void		free_scene(t_scene *scene);
 #endif

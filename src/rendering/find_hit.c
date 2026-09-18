@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_scene.c                                     :+:      :+:    :+:   */
+/*   find_hit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 12:19:41 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/07 11:21:58 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:46:31 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static double	intersect_plane(t_ray ray, t_vec3 plane_point,
 		return (DBL_MAX);
 	return (t);
 }
+
 bool	hit_plane(const t_plane *pl, const t_ray *ray, t_range range,
 		t_hit *hit)
 {
@@ -82,5 +83,3 @@ bool	find_hit(const t_scene *scene, const t_ray *ray,
 	}
 	return (hit_anything);
 }
-
-

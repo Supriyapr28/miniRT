@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:41 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:06 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_range
 	double	min;
 	double	max;
 }	t_range;
+
+typedef struct s_quad_params
+{
+	double	a;
+	double	b;
+	double	c;
+	t_range	range;
+}	t_quad_params;
 
 typedef struct s_hit
 {

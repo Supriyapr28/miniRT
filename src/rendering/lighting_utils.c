@@ -6,13 +6,11 @@
 /*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 12:00:00 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/03 12:05:00 by spaipur-         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:16:07 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-
 
 double	color_ratio(int channel)
 {

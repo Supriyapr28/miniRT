@@ -46,16 +46,6 @@ static t_object	*add_object(t_scene *scene, t_obj_type type)
 	return (new_obj);
 }
 
-static int	parse_size(t_scene *scene, char *token, double *value,
-		const char *msg)
-{
-	if (parse_float(token, value))
-		return (ft_err_handler(scene, ERR_FLOAT));
-	if (*value <= 0.0)
-		return (ft_err_handler(scene, msg));
-	return (1);
-}
-
 int	parse_sphere(t_scene *scene, char **tokens)
 {
 	t_object	*obj;
