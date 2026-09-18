@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 16:00:00 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/07 15:27:12 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 09:54:25 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	handle_mouse(int button, int x, int y, void *param)
 	if (app == NULL || app->scene == NULL || button != 1
 		|| x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return (0);
-	ray = make_camera_ray(app->scene, x, y);
+	ray = shoot_ray(app->scene, x, y);
 	app->selected_object = pick_object(app->scene, &ray);
-	render_frame(app);
+	render_scene(app);
 	return (0);
 }

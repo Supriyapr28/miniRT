@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 11:54:47 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/14 17:02:25 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:08 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSE_H
 
 # include "objects.h"
+# include "camera.h"
 # include "error.h"
 # include <stdbool.h>
 # include <stdlib.h>
@@ -34,15 +35,6 @@ typedef struct s_atof
 	int		sign;
 }	t_atof;
 
-typedef struct s_camera
-{
-	int		id;
-	int		is_set;
-	t_vec3	coordinates;
-	t_vec3	direction;
-	double	fov;
-}	t_camera;
-
 typedef struct s_light
 {
 	t_vec3	origin;
@@ -59,33 +51,19 @@ typedef struct s_scene
 	t_object	*object;
 }	t_scene;
 
-typedef struct s_image
-{
-	int		width;
-	int		height;
-	int		bpp;
-	int		line_length;
-	int		endian;
-	void	*mlx_img;
-	char	*addr;
-	t_color	*pixels;
-}	t_image;
-
 t_scene		*parse_scene(const char *path);
-void		free_scene(t_scene *scene);
+int			parse_sphere(t_scene *scene, char **tokens);
+int			parse_plane(t_scene *scene, char **tokens);
+int			parse_cylinder(t_scene *scene, char **tokens);
+
 char		*trim_line(t_scene *scene, char *line);
 int			is_skippable_line(char *line);
 char		**create_tokens(t_scene *scene, char *line);
 int			get_expected_token_count(char *type);
 int			dispatch_scene_parsing(t_scene *scene, char **tokens);
-int			parse_ambient(t_scene *scene, char **tokens);
-int			parse_camera(t_scene *scene, char **tokens);
-int			parse_light(t_scene *scene, char **tokens);
-t_object	*add_object(t_scene *scene, t_obj_type type);
-int			parse_sphere(t_scene *scene, char **tokens);
-int			parse_plane(t_scene *scene, char **tokens);
-int			parse_cylinder(t_scene *scene, char **tokens);
 int			parse_float(const char *str, double *out);
+int			parse_size(t_scene *scene, char *token, double *value,
+				const char *msg);
 int			parse_vector(const char *str, t_vec3 *out);
 int			parse_color(const char *str, t_color *out);
 int			skip_spaces(const char *str, int i);
@@ -98,15 +76,6 @@ int			validate_tokens(t_scene *scene, char **tokens);
 void		free_tokens(char **tokens);
 size_t		array_size(char **arr);
 int			ft_err_handler(t_scene *scene, const char *msg);
-bool		intersect_planes(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-bool		intersect_spheres(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-bool		intersect_cylinder(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-void		render_scene(const t_scene *scene, t_image *img);
-bool		trace_ray(const t_scene *scene, const t_ray *ray,
-				t_hit *closest_hit);
-t_color		shade(const t_scene *scene, const t_hit *hit);
-int			skip_spaces(const char *str, int i);
+bool		solve_quadratic(const t_quad_params *params, double *t);
+void		free_scene(t_scene *scene);
 #endif

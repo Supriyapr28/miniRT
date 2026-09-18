@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_cylinder.c                                     :+:      :+:    :+:   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 17:47:25 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/09 11:16:22 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:15 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,20 @@ static void	build_cylinder_quad(const t_ray *ray, const t_cylinder *cyl,
 		- cyl->radius * cyl->radius;
 }
 
-static bool	solve_cylinder_quadratic(const t_ray *ray,
+static bool	cyl_quadratic(const t_ray *ray,
 			const t_cylinder *cyl, t_range range, double *out_t)
 {
-	t_cyl_quad	q;
-	double		discriminant;
-	double		sqrt_d;
-	double		t;
+	t_cyl_quad		q;
+	t_quad_params	params;
 
 	build_cylinder_quad(ray, cyl, &q);
 	if (vec3_abs(q.a) < 1e-15)
 		return (false);
-	discriminant = q.b * q.b - 4.0 * q.a * q.c;
-	if (discriminant < 0.0)
-		return (false);
-	sqrt_d = sqrt(discriminant);
-	t = (-q.b - sqrt_d) / (2.0 * q.a);
-	if (t < range.min || t > range.max)
-	{
-		t = (-q.b + sqrt_d) / (2.0 * q.a);
-		if (t < range.min || t > range.max)
-			return (false);
-	}
-	*out_t = t;
-	return (true);
+	params.a = q.a;
+	params.b = q.b;
+	params.c = q.c;
+	params.range = range;
+	return (solve_quadratic(&params, out_t));
 }
 
 static bool	intersect_lateral(const t_ray *ray, const t_cylinder *cyl,
@@ -65,7 +55,7 @@ static bool	intersect_lateral(const t_ray *ray, const t_cylinder *cyl,
 	t_vec3	axis_vec;
 	double	axis_dist;
 
-	if (!solve_cylinder_quadratic(ray, cyl, range, &t))
+	if (!cyl_quadratic(ray, cyl, range, &t))
 		return (false);
 	p = vec3_add(ray->origin, vec3_scale(ray->direction, t));
 	axis_vec = vec3_sub(p, cyl->origin);

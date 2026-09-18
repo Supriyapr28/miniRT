@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   draw_axes_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:03:43 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:27:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/09/18 10:43:15 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_internal.h"
 #include "rt.h"
 
 static void	init_algo(t_line_draw *line, t_line_algo *algo)
@@ -41,6 +40,18 @@ static void	bresenham_step(t_line_algo *algo, int *e2)
 		algo->err += algo->dx;
 		algo->y0 += algo->sy;
 	}
+}
+
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dst;
+
+	if (mlx == NULL || mlx->addr == NULL)
+		return ;
+	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+		return ;
+	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
+	*(unsigned int *)dst = (unsigned int)color;
 }
 
 void	draw_line_internal(t_line_draw *line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 17:39:05 by us                #+#    #+#             */
-/*   Updated: 2026/09/10 10:50:57 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 09:53:44 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,16 @@ int	handle_key(int keycode, void *param)
 	if (keycode == KEY_RESET)
 	{
 		reset_scene_state(app);
-		render_frame(app);
+		render_scene(app);
 		return (0);
 	}
 	if (handle_object_key(keycode, app->selected_object))
 	{
-		render_frame(app);
+		render_scene(app);
 		return (0);
 	}
 	if (apply_camera_key(keycode, &app->scene->camera))
-		render_frame(app);
+		render_scene(app);
 	return (0);
 }
 

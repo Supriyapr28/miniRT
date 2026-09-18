@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 14:11:41 by spaipur-          #+#    #+#             */
-/*   Updated: 2026/09/14 17:38:36 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/09/18 10:49:06 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ typedef struct s_ray
 	t_vec3	origin;
 	t_vec3	direction;
 }	t_ray;
+
+typedef struct s_range
+{
+	double	min;
+	double	max;
+}	t_range;
+
+typedef struct s_quad_params
+{
+	double	a;
+	double	b;
+	double	c;
+	t_range	range;
+}	t_quad_params;
 
 typedef struct s_hit
 {
@@ -137,5 +151,6 @@ double	vec3_abs(double value);
 
 void	object_save_initial(t_object *object);
 void	object_restore_initial(t_object *object);
+t_vec3	*object_get_position(t_object *obj);
 
 #endif

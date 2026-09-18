@@ -39,6 +39,15 @@ static int	parse_component(const char *str, int i, double *out)
 	return (k);
 }
 
+int	parse_size(t_scene *scene, char *token, double *value, const char *msg)
+{
+	if (parse_float(token, value))
+		return (ft_err_handler(scene, ERR_FLOAT));
+	if (*value <= 0.0)
+		return (ft_err_handler(scene, msg));
+	return (1);
+}
+
 int	parse_vector(const char *str, t_vec3 *out)
 {
 	int	i;

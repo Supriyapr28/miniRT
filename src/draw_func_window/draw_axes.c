@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_internal.h"
 #include "rt.h"
 
-void	draw_line_internal(t_line_draw *line);
-
-static void	project_axis(const t_camera *camera, t_vec3 axis, int *screen_x,
+void	project_axis(const t_camera *camera, t_vec3 axis, int *screen_x,
 	int *screen_y)
 {
 	t_camera_basis	basis;
@@ -56,4 +53,5 @@ void	draw_axes(t_app *app)
 	draw_axis_line(app, (t_vec3){1.0, 0.0, 0.0}, 0xFF0000);
 	draw_axis_line(app, (t_vec3){0.0, 1.0, 0.0}, 0x00FF00);
 	draw_axis_line(app, (t_vec3){0.0, 0.0, 1.0}, 0x0000FF);
+	draw_object_markers(app);
 }

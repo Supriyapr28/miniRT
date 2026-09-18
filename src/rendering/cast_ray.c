@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include "objects.h"
-#include "parse.h"
-#include "draw_internal.h"
-#include "camera.h"
 #include <float.h>
 #include <math.h>
 
@@ -22,7 +18,30 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-t_ray	make_camera_ray(const t_scene *scene, int x, int y)
+static t_vec3	camera_world_up(t_vec3 forward)
+{
+	if (vec3_abs(vec3_dot(forward, (t_vec3){0.0, 1.0, 0.0})) > 0.999)
+		return ((t_vec3){0.0, 0.0, 1.0});
+	return ((t_vec3){0.0, 1.0, 0.0});
+}
+
+t_camera_basis	camera_get_basis(const t_camera *camera)
+{
+	t_camera_basis	basis;
+
+	if (camera == NULL)
+		return ((t_camera_basis){(t_vec3){0.0, 0.0, 0.0},
+			(t_vec3){0.0, 0.0, 0.0}, (t_vec3){0.0, 0.0, 0.0}});
+	basis.forward = vec3_normalize(camera->direction);
+	basis.up = camera_world_up(basis.forward);
+	basis.right = vec3_cross(basis.up, basis.forward);
+	basis.right = vec3_normalize(basis.right);
+	basis.up = vec3_cross(basis.forward, basis.right);
+	basis.up = vec3_normalize(basis.up);
+	return (basis);
+}
+
+t_ray	shoot_ray(const t_scene *scene, int x, int y)
 {
 	t_camera_basis	basis;
 	t_ray			ray;
@@ -41,42 +60,4 @@ t_ray	make_camera_ray(const t_scene *scene, int x, int y)
 						* 2.0)) * fov));
 	ray.direction = vec3_normalize(ray.direction);
 	return (ray);
-}
-
-double	ray_plane_intersection(t_ray ray, t_vec3 plane_point,
-			t_vec3 plane_normal)
-{
-	double	denom;
-	double	numerator;
-	double	t;
-
-	denom = vec3_dot(ray.direction, plane_normal);
-	if (vec3_abs(denom) < 1e-12)
-		return (DBL_MAX);
-	numerator = vec3_dot(vec3_sub(plane_point, ray.origin),
-			plane_normal);
-	t = numerator / denom;
-	if (t < 0.0)
-		return (DBL_MAX);
-	return (t);
-}
-
-static t_vec3	ray_at(t_ray ray, double t)
-{
-	return (vec3_add(ray.origin, vec3_scale(ray.direction, t)));
-}
-
-bool	hit_plane(const t_plane *pl, const t_ray *ray, t_range range,
-		t_hit *hit)
-{
-	double	t;
-
-	t = ray_plane_intersection(*ray, pl->origin, pl->normal);
-	if (t < range.min || t > range.max)
-		return (false);
-	hit->t = t;
-	hit->point = ray_at(*ray, t);
-	hit->normal = pl->normal;
-	hit->color = pl->color;
-	return (true);
 }

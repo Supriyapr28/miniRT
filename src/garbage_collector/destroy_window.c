@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   destroy_window.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spaipur- <spaipur-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/16 12:04:18 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/09/16 11:16:18 by uvadakku         ###   ########.fr       */
+/*   Created: 2026/09/18 10:44:11 by spaipur-          #+#    #+#             */
+/*   Updated: 2026/09/18 10:44:40 by spaipur-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-t_mlx	*init_mlx(void)
-{
-	t_mlx	*mlx;
-
-	mlx = (t_mlx *)malloc(sizeof(*mlx));
-	if (mlx == NULL)
-		return (NULL);
-	mlx->mlx = mlx_init();
-	if (mlx->mlx == NULL)
-	{
-		free(mlx);
-		return (NULL);
-	}
-	mlx->win = NULL;
-	mlx->img = NULL;
-	mlx->addr = NULL;
-	mlx->bpp = 0;
-	mlx->line_len = 0;
-	mlx->endian = 0;
-	return (mlx);
-}
 
 #ifdef __APPLE__
 
@@ -66,14 +44,11 @@ void	destroy_mlx(t_mlx *mlx)
 	free(mlx);
 }
 
-void	put_pixel(t_mlx *mlx, int x, int y, int color)
+void	destroy_app(t_app *app)
 {
-	char	*dst;
-
-	if (mlx == NULL || mlx->addr == NULL)
+	if (app == NULL)
 		return ;
-	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-		return ;
-	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
-	*(unsigned int *)dst = (unsigned int)color;
+	if (app->scene != NULL)
+		free_scene(app->scene);
+	destroy_mlx(app->mlx);
 }
